@@ -1,13 +1,13 @@
-package com.ChiBao.Envelopes;
+package com.chibao.envelope;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ChiBaoApplication {
+public class ChibaoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ChiBaoApplication.class, args);
+		SpringApplication.run(ChibaoApplication.class, args);
 	}
 
 }

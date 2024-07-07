@@ -1,10 +1,10 @@
-package com.ChiBao.Envelopes;
+package com.chibao.envelope;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ChiBaoApplicationTests {
+class ChibaoApplicationTests {
 
 	@Test
 	void contextLoads() {
