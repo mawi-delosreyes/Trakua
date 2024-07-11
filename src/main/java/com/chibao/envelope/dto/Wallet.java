@@ -47,5 +47,4 @@ public class Wallet {
     public void setWalletName() {
         this.wallet_name = wallet_name;
     }
-
 }
