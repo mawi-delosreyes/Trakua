@@ -17,13 +17,28 @@ public class Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer user_id;
-    private String first_name;
-    private String last_name;
-    private String email_address;
+    @Column(name = "user_id")
+    private Integer userId;
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "email_address")
+    private String emailAddress;
+
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "currency")
     private String currency;
-    private double monthly_income;
-    private double savings_goal;
+
+    @Column(name = "monthly_income")
+    private double monthlyIncome;
+
+    @Column(name = "savings_goal")
+    private double savingsGoal;
 
 }

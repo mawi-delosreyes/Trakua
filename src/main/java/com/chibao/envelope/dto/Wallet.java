@@ -16,35 +16,36 @@ import lombok.NoArgsConstructor;
 public class Wallet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer wallet_id;
+    @Column(name = "wallet_id")
+    private Integer walletId;
 
     @Column(name = "user_id")
-    private Integer user_id;
+    private Integer userId;
 
     @Column(name = "wallet_name")
-    private String wallet_name;
+    private String walletName;
 
     public Integer getWalletId() {
-        return wallet_id;
+        return walletId;
     }
 
     public void setWalletId() {
-        this.wallet_id = wallet_id;
+        this.walletId = walletId;
     }
 
     public Integer getUserId() {
-        return user_id;
+        return userId;
     }
 
     public void setUserId() {
-        this.user_id = user_id;
+        this.userId = userId;
     }
 
     public String getWalletName() {
-        return wallet_name;
+        return walletName;
     }
 
     public void setWalletName() {
-        this.wallet_name = wallet_name;
+        this.walletName = walletName;
     }
 }

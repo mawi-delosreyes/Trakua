@@ -3,12 +3,12 @@ package com.chibao.envelope.controller;
 import com.chibao.envelope.dto.Wallet;
 import com.chibao.envelope.dto.WalletAccount;
 import com.chibao.envelope.service.WalletService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/wallet")
@@ -43,4 +43,10 @@ public class WalletController {
         }
     }
 
+    @GetMapping("/getWallet")
+    public Optional<Wallet> getWalletDetails(
+            @RequestParam(required = true) Integer user_id
+    ) {
+        return walletService.getWalletDetails(user_id);
+    }
 }

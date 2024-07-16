@@ -15,79 +15,80 @@ import lombok.NoArgsConstructor;
 public class Envelopes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer envelope_id;
+    @Column(name = "envelope_id")
+    private Integer envelopeId;
 
     @Column(name = "envelope_name")
-    private String envelope_name;
+    private String envelopeName;
 
     @Column(name = "user_id")
-    private Integer user_id;
+    private Integer userId;
 
     @Column(name = "envelope_total_balance")
-    private double envelope_total_balance;
+    private double envelopeTotalBalance;
 
     @Column(name = "envelope_balance")
-    private double envelope_balance;
+    private double envelopeBalance;
 
     @Column(name = "envelope_type")
-    private String envelope_type;
+    private String envelopeType;
 
     @Column(name = "number_of_sub_envelopes")
-    private Integer number_of_sub_envelopes;
+    private Integer numberOfSubEnvelopes;
 
     public Integer getEnvelopeId() {
-        return envelope_id;
+        return envelopeId;
     }
 
     public void setEnvelopeId() {
-        this.envelope_id = envelope_id;
+        this.envelopeId = envelopeId;
     }
 
     public String getEnvelopeName() {
-        return envelope_name;
+        return envelopeName;
     }
 
     public void setEnvelopeName() {
-        this.envelope_name = envelope_name;
+        this.envelopeName = envelopeName;
     }
 
     public Integer getUserId() {
-        return user_id;
+        return userId;
     }
 
     public void setUserId() {
-        this.user_id = user_id;
+        this.userId = userId;
     }
 
-    public double getEnvelopeTotalBalance() {
-        return envelope_total_balance;
+    public double getEnvelopeTotalBalance(Integer envelope_id) {
+        return envelopeTotalBalance;
     }
 
-    public void setEnvelopeTotalBalance() {
-        this.envelope_total_balance = envelope_total_balance;
+    public void setEnvelopeTotalBalance(double envelope_total_balance) {
+        this.envelopeTotalBalance = envelope_total_balance;
     }
 
-    public double getEnvelopeBalance() {
-        return envelope_balance;
+    public double getEnvelopeBalance(Integer envelope_id) {
+        return envelopeBalance;
     }
 
-    public void setEnvelopeBalance() {
-        this.envelope_balance = envelope_balance;
+    public void setEnvelopeBalance(double envelope_balance) {
+        this.envelopeBalance = envelope_balance;
     }
 
     public String getEnvelopeType() {
-        return envelope_type;
+        return envelopeType;
     }
 
     public void setEnvelopeType() {
-        this.envelope_type = envelope_type;
+        this.envelopeType = envelopeType;
     }
 
     public Integer getNumberOfSubEnvelopes() {
-        return number_of_sub_envelopes;
+        return numberOfSubEnvelopes;
     }
 
     public void setNumberOfSubEnvelopes() {
-        this.number_of_sub_envelopes = number_of_sub_envelopes;
+        this.numberOfSubEnvelopes = numberOfSubEnvelopes;
     }
 }
