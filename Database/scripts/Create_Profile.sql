@@ -1,0 +1,2 @@
+INSERT INTO User_Profile (first_name, last_name, email_address, password, currency, monthly_income, savings_goal) 
+VALUES ("Mark", "de los Reyes", "mwldelosreyes13@gmail.com", "sample", "PHP", 60000, 200000);
