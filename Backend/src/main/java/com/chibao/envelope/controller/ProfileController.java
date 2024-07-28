@@ -33,10 +33,5 @@ public class ProfileController {
     ) {
         return profileService.getProfileAnalytics(user_id);
     }
-
     
-
-
-
-
 }
