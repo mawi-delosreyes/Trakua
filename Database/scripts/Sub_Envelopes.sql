@@ -4,5 +4,7 @@ CREATE TABLE Sub_Envelopes (
 	sub_envelope_total_balance double NOT NULL,
 	sub_envelope_balance double NOT NULL,
 	envelope_id int NOT NULL,
+	category varchar(10) NOT NULL,
+	roll_over BOOL NOT NULL,
 	PRIMARY KEY (sub_envelope_id)
 );
