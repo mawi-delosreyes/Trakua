@@ -31,6 +31,12 @@ public class SubEnvelopes {
     @Column(name = "envelope_id")
     private Integer envelopeId;
 
+    @Column(name = "category")
+    private String category;
+
+    @Column(name = "roll_over")
+    private boolean rollOver;
+
     public Integer getSubEnvelopeId() {
         return subEnvelopeId;
     }
@@ -70,4 +76,21 @@ public class SubEnvelopes {
     public void setEnvelopeId() {
         this.envelopeId = envelopeId;
     }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory() {
+        this.category = category;
+    }
+
+    public boolean getRollOver() {
+        return rollOver;
+    }
+
+    public void setRollOver() {
+        this.rollOver = rollOver;
+    }
+
 }
