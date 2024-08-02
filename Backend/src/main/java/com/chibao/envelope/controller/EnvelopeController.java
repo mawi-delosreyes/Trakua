@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -45,16 +46,16 @@ public class EnvelopeController {
     }
 
     @GetMapping("/getEnvelopes")
-    public Optional<Envelopes> getEnvelopeDetails(
+    public Map<String, Map> getEnvelopeDetails(
             @RequestParam(required = true) Integer user_id
     ) {
         return envelopeService.getEnvelopeDetails(user_id);
     }
 
     @GetMapping("/getSubEnvelopes")
-    public Optional<SubEnvelopes> getSubEnvelopeDetails(
+    public Map<String, Map> getSubEnvelopeDetails(
             @RequestParam(required = true) Integer envelope_id
     ) {
-        return envelopeService.getSubEnvelopeDetails(envelope_id);
+        return envelopeService.getSubEnvelopeDetails();
     }
 }
