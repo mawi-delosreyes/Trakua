@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface ProfileService {
 
-    Optional<ProfileDetails> getProfileDetails(Integer user_id);
+    Map<String, Object> getProfileDetails(Integer user_id);
     Optional<Map<Integer, Map>> getProfileAnalytics(Integer user_id);
 
 }

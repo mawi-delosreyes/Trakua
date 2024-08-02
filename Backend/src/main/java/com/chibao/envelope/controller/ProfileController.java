@@ -21,7 +21,7 @@ public class ProfileController {
     private ProfileService profileService;
 
     @GetMapping("/getProfileDetails")
-    public Optional<ProfileDetails> getProfileDetails (
+    public Map<String, Object> getProfileDetails (
             @RequestParam(required = true) Integer user_id
     ) {
         return profileService.getProfileDetails(user_id);

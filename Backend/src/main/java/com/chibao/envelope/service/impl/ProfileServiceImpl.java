@@ -25,8 +25,23 @@ public class ProfileServiceImpl implements ProfileService {
 
 
     @Override
-    public Optional<ProfileDetails> getProfileDetails(Integer user_id) {
-        return profileDetailsRepository.findById(user_id);
+    public Map<String, Object> getProfileDetails(Integer user_id) {
+
+        Optional<ProfileDetails> profile_details = profileDetailsRepository.findById(user_id);
+        Map<String, Object> profile_details_map = new HashMap<>();
+
+        if (!profile_details.isEmpty()) {
+            profile_details_map.put("first_name", profile_details.get().getFirstName());
+            profile_details_map.put("last_name", profile_details.get().getLastName());
+            profile_details_map.put("email_address", profile_details.get().getEmailAddress());
+            profile_details_map.put("currency", profile_details.get().getCurrency());
+            profile_details_map.put("savings_goal", profile_details.get().getSavingsGoal());
+            profile_details_map.put("start_period", profile_details.get().getStartTimePeriod());
+            profile_details_map.put("end_period", profile_details.get().getEndTimePeriod());
+            profile_details_map.put("profile_picture", profile_details.get().getProfilePicture());
+        }
+
+        return profile_details_map;
     }
 
     @Override

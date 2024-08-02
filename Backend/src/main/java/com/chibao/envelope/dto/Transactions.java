@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -50,6 +51,9 @@ public class Transactions {
     @Column(name = "from_sub_envelope_id")
     private Integer fromSubEnvelopeId;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "sub_envelope_id", referencedColumnName = "sub_envelope_id", insertable=false, updatable=false)
+    private SubEnvelopes subEnvelopesSet;
 
     public Integer getTransactionId() {
         return transactionId;
@@ -139,4 +143,11 @@ public class Transactions {
         this.fromSubEnvelopeId = fromSubEnvelopeId;
     }
 
+    public SubEnvelopes getSubEnvelopeSet() {
+        return subEnvelopesSet;
+    }
+
+    public void setSubEnvelopeSet() {
+        this.subEnvelopesSet = subEnvelopesSet;
+    }
 }

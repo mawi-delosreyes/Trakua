@@ -36,7 +36,7 @@ public class SubEnvelopes {
 
     @Column(name = "roll_over")
     private boolean rollOver;
-
+    
     public Integer getSubEnvelopeId() {
         return subEnvelopeId;
     }
