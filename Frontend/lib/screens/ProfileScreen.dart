@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:chibao/style/ApplicationColors.dart';
-import 'package:chibao/widgets/NavigationBar1.dart';
+import 'package:frontend/style/ApplicationColors.dart';
+import 'package:frontend/widgets/NavigationBar1.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -8,7 +8,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'ChiBao',
+        title: 'Frontend',
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           backgroundColor: ApplicationColors.Background,

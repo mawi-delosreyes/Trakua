@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:chibao/style/ApplicationColors.dart';
+import 'package:frontend/style/ApplicationColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NavigationBar1 extends StatefulWidget {
