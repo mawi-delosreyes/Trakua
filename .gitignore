@@ -37,3 +37,14 @@ build/
 .mvn
 mvnw
 mvnw.cmd
+
+.dart_tool/
+analysis_options.yaml
+.metadata
+android/
+ios/
+linux/
+macos/
+web/
+windows/
+pubspec.lock
