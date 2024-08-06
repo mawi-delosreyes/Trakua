@@ -9,7 +9,7 @@ class TemplateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Frontend',
+        title: 'Chibao',
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           backgroundColor: ApplicationColors.Background,
