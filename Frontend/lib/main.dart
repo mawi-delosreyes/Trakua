@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'screens/TemplateScreen.dart';
 import 'screens/ProfileScreen.dart';
+import 'screens/WalletScreen.dart';
 
 void main() {
-  runApp(const ProfileScreen());
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: WalletScreen())
+  );
+
 }
