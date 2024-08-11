@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/style/ApplicationColors.dart';
+import './WalletPopup.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NavigationBar1 extends StatefulWidget {
@@ -77,23 +78,32 @@ class _NavigationBar1State extends State<NavigationBar1> {
             child: FractionallySizedBox(
               widthFactor: 0.4,
               heightFactor: 0.4,
-              child: Container(
-                  child: FractionallySizedBox (
-                    widthFactor: 0.5,
-                    heightFactor: 0.5,
-                    child: SvgPicture.asset(
-                      'assets/icons/edit.svg',
-                      color: ApplicationColors.Secondary_900),
-                  ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: ApplicationColors.Secondary_900,
-                    width: 2,
-                  ),
-                  shape: BoxShape.circle,
-                  color: ApplicationColors.Secondary_100
-                ),
-              )
+              child: 
+                InkWell(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => WalletPopupWidget(),
+                    );
+                  },
+                  child: Container(
+                      child: FractionallySizedBox (
+                        widthFactor: 0.5,
+                        heightFactor: 0.5,
+                        child: SvgPicture.asset(
+                          'assets/icons/edit.svg',
+                          color: ApplicationColors.Secondary_900),
+                      ),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: ApplicationColors.Secondary_900,
+                        width: 2,
+                      ),
+                      shape: BoxShape.circle,
+                      color: ApplicationColors.Secondary_100
+                    ),
+                  )
+              ),
             )
           )
         ]
