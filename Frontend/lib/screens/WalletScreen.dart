@@ -56,6 +56,7 @@ class _WalletScreenState extends State<WalletScreen> {
                         splashColor: Colors.transparent,
                         onTap: () {
                           setState(() {
+                            if(selectedIndex == position) {position = -1;}
                             selectedIndex = position;
                           });
                         },
