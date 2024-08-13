@@ -5,7 +5,9 @@ import 'package:frontend/widgets/NavigationBar3.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:fl_chart/fl_chart.dart';
-
+import 'package:sqflite/sqflite.dart';
+import 'package:frontend/repository/LocalInitRepo.dart';
+import 'package:frontend/repository/LocalInitRepoImpl.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -21,6 +23,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool _swapDisplay = true;
   String _startDate = "Start Date";
   String _endDate = "End Date";
+
+  @override
+  void initState() {
+    super.initState();
+    print(LocalInitRepoImpl().initializeDB());
+  }
 
   @override
   Widget build(BuildContext context) {
