@@ -10,12 +10,6 @@ class LocalInitRepoImpl implements LocalInitRepo{
 
   @override  
   Future<Database> initializeDB() async {
-    Future existingDB = LocalInitDao().dbHelper.checkExistingDB();
-
-    if (existingDB == false) {
-      return LocalInitDao().dbHelper.createDatabase();
-    } else{
-      return LocalInitDao().dbHelper.database;
-    }
+    return LocalInitDao().dbHelper.getDatabase;
   }
 }

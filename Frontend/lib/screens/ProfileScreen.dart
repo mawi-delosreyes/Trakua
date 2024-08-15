@@ -27,7 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    print(LocalInitRepoImpl().initializeDB());
+    LocalInitRepoImpl().initializeDB();
   }
 
   @override

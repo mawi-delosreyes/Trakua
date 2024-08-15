@@ -14,23 +14,24 @@ class ChibaoDatabase {
 
   Future<String> generatePath() async {
     Directory directory = Platform.isIOS ? await getLibraryDirectory() : await getApplicationDocumentsDirectory();
+    print(directory);
     return join(directory.path, DATABASE_NAME);
   }
 
   Database? _database;
 
-  Future<Database> get database async {
-    _database ??= await createDatabase();
+  Future<Database> get getDatabase async {
+    _database ??= await checkDB();
     return _database!;
   }
 
+  /*
   Future<bool> checkExistingDB() async {
-    print("DB Path: " + await generatePath());
     return databaseFactory.databaseExists(await generatePath());
   }
+  */
 
-  Future<Database> createDatabase() async {
-
+  Future<Database> checkDB() async {
     var database = await openDatabase(await generatePath(),
         version: DATABASE_VERSION, onCreate: initDB);
     return database;
@@ -42,5 +43,6 @@ class ChibaoDatabase {
 
   void initDB(Database database, int version) async {
     ProfileDetailsTable.createTable(database, version);
+    ProfileDetailsTable.insertProfileDetails(database);
   }
 }
