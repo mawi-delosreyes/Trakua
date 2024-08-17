@@ -25,12 +25,6 @@ class ChibaoDatabase {
     return _database!;
   }
 
-  /*
-  Future<bool> checkExistingDB() async {
-    return databaseFactory.databaseExists(await generatePath());
-  }
-  */
-
   Future<Database> checkDB() async {
     var database = await openDatabase(await generatePath(),
         version: DATABASE_VERSION, onCreate: initDB);

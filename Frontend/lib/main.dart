@@ -4,9 +4,6 @@ import 'screens/ProfileScreen.dart';
 import 'screens/WalletScreen.dart';
 
 
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: ProfileScreen())
-  );
+void main() async {
+  runApp(const ProfileScreen());
 }

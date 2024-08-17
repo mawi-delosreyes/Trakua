@@ -1,4 +1,4 @@
-import 'package:frontend/database/dao/LocalInitDao.dart';
+import 'package:frontend/database/dao/ChibaoDao.dart';
 import 'package:frontend/model/ProfileDetails.dart';
 import 'package:frontend/repository/LocalInitRepo.dart';
 import 'package:sqflite/sqflite.dart';
@@ -6,10 +6,10 @@ import 'package:sqflite/sqflite.dart';
 class LocalInitRepoImpl implements LocalInitRepo{
 
   LocalInitRepoImpl(): super();
-  final LocalInitDao localInitDao = LocalInitDao();
+  final ChibaoDao localInitDao = ChibaoDao();
 
   @override  
   Future<Database> initializeDB() async {
-    return LocalInitDao().dbHelper.getDatabase;
+    return ChibaoDao().dbHelper.getDatabase;
   }
 }

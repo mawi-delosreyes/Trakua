@@ -1,15 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/style/ApplicationColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:frontend/widgets/ProfileDetails.dart';
 
 class NavigationBar3 extends StatefulWidget {
-  const NavigationBar3({super.key});
+  final TextEditingController firstNameController;
+  final TextEditingController lastNameController;
+  final TextEditingController emailAddressController; 
+  final TextEditingController currencyController;
+  final TextEditingController savingsGoalController; 
+  final TextEditingController startDateController;
+  final TextEditingController endDateController;
+
+   NavigationBar3({
+    Key? key, 
+    required this.firstNameController, 
+    required this.lastNameController,
+    required this.emailAddressController, 
+    required this.currencyController, 
+    required this.savingsGoalController, 
+    required this.startDateController, 
+    required this.endDateController
+  }) : super(key: key);
 
   @override
   State<NavigationBar3> createState() => _NavigationBar3State();
 }
 
 class _NavigationBar3State extends State<NavigationBar3> {
+
   @override
   Widget build(BuildContext context) {
     return Row (
@@ -74,10 +93,15 @@ class _NavigationBar3State extends State<NavigationBar3> {
           ),
 
           Flexible (
-            child: FractionallySizedBox(
-              widthFactor: 0.4,
-              heightFactor: 0.4,
-              child: Container(
+            child:
+            GestureDetector(
+              onTap: () {
+                print(widget.firstNameController.text);
+              },
+              child: FractionallySizedBox(
+                widthFactor: 0.4,
+                heightFactor: 0.4,
+                child: Container(
                   child: FractionallySizedBox (
                     widthFactor: 0.5,
                     heightFactor: 0.5,
@@ -85,16 +109,17 @@ class _NavigationBar3State extends State<NavigationBar3> {
                       'assets/icons/check.svg',
                       color: ApplicationColors.Secondary_900),
                   ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: ApplicationColors.Secondary_900,
-                    width: 2,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: ApplicationColors.Secondary_900,
+                      width: 2,
+                    ),
+                    shape: BoxShape.circle,
+                    color: ApplicationColors.Secondary_100
                   ),
-                  shape: BoxShape.circle,
-                  color: ApplicationColors.Secondary_100
-                ),
-              )
-            )
+                )
+            )   
+          )    
           )
         ]
       );

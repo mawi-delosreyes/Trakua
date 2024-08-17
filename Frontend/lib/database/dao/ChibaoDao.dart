@@ -1,9 +1,9 @@
 import 'package:frontend/database/Database.dart';
 
 
-class LocalInitDao {
+class ChibaoDao {
   final ChibaoDatabase dbHelper;
 
-  LocalInitDao([ChibaoDatabase? dbHelper])
+  ChibaoDao([ChibaoDatabase? dbHelper])
       : dbHelper = dbHelper ?? ChibaoDatabase.dbHelper;
 }
