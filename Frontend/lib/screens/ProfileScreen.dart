@@ -19,16 +19,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   List<String> profileDisplayList = ["Profile", "Analytics"];
   bool _swapDisplay = true;
 
-
-  /*
-  @override
-  void initState() {
-    LocalInitRepoImpl().initializeDB();
-    super.initState();
-  }
-  */
-
-
   @override
   Widget build(BuildContext context) {
 
