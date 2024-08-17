@@ -2,8 +2,19 @@ import 'package:flutter/material.dart';
 import 'screens/TemplateScreen.dart';
 import 'screens/ProfileScreen.dart';
 import 'screens/WalletScreen.dart';
+import 'package:frontend/repository/LocalInitRepoImpl.dart';
 
 
 void main() async {
-  runApp(const ProfileScreen());
+  WidgetsFlutterBinding.ensureInitialized();
+  initialize().initState();
+  runApp(
+    const ProfileScreen()
+  );
+}
+
+class initialize {
+  void initState() {
+    LocalInitRepoImpl().initializeDB();
+  }
 }
