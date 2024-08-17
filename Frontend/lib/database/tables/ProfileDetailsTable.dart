@@ -18,7 +18,7 @@ class ProfileDetailsTable {
     ''');
   }
 
-  static void insertProfileDetails(Database database) async {
+  static void insertProfileDetail(Database database) async {
     await database.rawInsert('''
       INSERT INTO Profile_Details (
         first_name, last_name, email_address, password, currency, savings_goal, start_time_period, end_time_period

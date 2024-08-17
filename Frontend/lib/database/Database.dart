@@ -1,7 +1,14 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:frontend/database/tables/AccountsTable.dart';
+import 'package:frontend/database/tables/EnvelopesTable.dart';
+import 'package:frontend/database/tables/ProfileAnalyticsTable.dart';
 import 'package:frontend/database/tables/ProfileDetailsTable.dart';
+import 'package:frontend/database/tables/ScheduledTransactionsTable.dart';
+import 'package:frontend/database/tables/SubEnvelopes.dart';
+import 'package:frontend/database/tables/TransactionsTable.dart';
+import 'package:frontend/database/tables/WalletsTable.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -36,7 +43,17 @@ class ChibaoDatabase {
   }
 
   void initDB(Database database, int version) async {
+    // initialize table
+    AccountsTable.createTable(database, version);
+    EnvelopesTable.createTable(database, version);
+    ProfileAnalyticsTable.createTable(database, version);
     ProfileDetailsTable.createTable(database, version);
-    ProfileDetailsTable.insertProfileDetails(database);
+    ScheduledTransactionsTable.createTable(database, version);
+    SubEnvelopesTable.createTable(database, version);
+    TransactionsTable.createTable(database, version);
+    WalletTable.createTable(database, version);    
+    
+    // add profile account
+    ProfileDetailsTable.insertProfileDetail(database);
   }
 }

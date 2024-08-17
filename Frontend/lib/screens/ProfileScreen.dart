@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:frontend/model/ProfileDetails.dart';
-import 'package:frontend/repository/ProfileDetailsRepo.dart';
-import 'package:frontend/repository/ProfileDetailsRepoImpl.dart';
 import 'package:frontend/style/ApplicationColors.dart';
 import 'package:frontend/widgets/NavigationBar3.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:frontend/repository/LocalInitRepo.dart';
 import 'package:frontend/repository/LocalInitRepoImpl.dart';
 import 'package:frontend/widgets/ProfileDetails.dart';
 
@@ -26,11 +20,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool _swapDisplay = true;
 
 
+  /*
   @override
   void initState() {
     LocalInitRepoImpl().initializeDB();
     super.initState();
   }
+  */
 
 
   @override
@@ -49,7 +45,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
 
     return MaterialApp(      
-        title: 'Chibao',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(useMaterial3: false,),
         home: Scaffold(
