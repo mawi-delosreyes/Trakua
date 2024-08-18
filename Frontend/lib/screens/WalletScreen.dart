@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/model/Wallet.dart';
 import 'package:frontend/style/ApplicationColors.dart';
 import 'package:frontend/widgets/NavigationBar1.dart';
 import '../widgets/WalletCards.dart';
+import 'package:frontend/repository/WalletRepoImpl.dart';
 
 class WalletScreen extends StatefulWidget {
   final int user_id;
@@ -23,7 +25,6 @@ class _WalletScreenState extends State<WalletScreen> {
   @override
   Widget build(BuildContext context) {
     int user_id = widget.user_id;
-    print(user_id);
 
     return MaterialApp(
         title: 'Chibao',
@@ -52,6 +53,15 @@ class _WalletScreenState extends State<WalletScreen> {
               ),
               Flexible(
                 flex: 50,
+                child: FutureBuilder(
+                  future: WalletRepoImpl().getWallets(), 
+                  builder: (BuildContext context, AsyncSnapshot<List<Wallet>> walletList) {
+                    print(walletList.hasData? walletList.data : "No data");
+                    return Container();
+                  }
+                ),
+                
+                /*
                 child: ListView.builder(
                   padding: EdgeInsets.zero,
                   scrollDirection: Axis.vertical,
@@ -82,6 +92,7 @@ class _WalletScreenState extends State<WalletScreen> {
                     );
                   }
                 )
+                */
               ),
               Expanded(
                 flex: 15,
