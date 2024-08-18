@@ -9,7 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initialize().initState();
   runApp(
-    const ProfileScreen()
+    const WalletScreen()
   );
 }
 

@@ -13,12 +13,15 @@ class WalletPopupWidget extends StatefulWidget {
 
 class _WalletPopupWidget extends State<WalletPopupWidget> {
 
+  final _walletNameController = TextEditingController();
+  final _accountNameController = TextEditingController();
+  final _amountController = TextEditingController();
   
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(8))
       ),
       backgroundColor: ApplicationColors.Background,
@@ -44,7 +47,7 @@ class _WalletPopupWidget extends State<WalletPopupWidget> {
               ),
             ),
 
-            Text("Wallet"),
+            Text("New Wallet"),
 
             SizedBox(
               height: MediaQuery.of(context).size.height/50,
@@ -58,8 +61,8 @@ class _WalletPopupWidget extends State<WalletPopupWidget> {
                   Container (
                     height: MediaQuery.of(context).size.height/20,
                     width: MediaQuery.of(context).size.width/1.5,            
-                    child: const TextField(
-                      decoration: InputDecoration(
+                    child: TextField(
+                      decoration: const InputDecoration(
                         fillColor: ApplicationColors.Base_White,
                         filled: true,
                         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -78,15 +81,16 @@ class _WalletPopupWidget extends State<WalletPopupWidget> {
                           color: ApplicationColors.Primary_900
                         ),
                       ),
-                      style: TextStyle(color: ApplicationColors.Primary_900),
+                      controller: _walletNameController,
+                      style: const TextStyle(color: ApplicationColors.Primary_900),
                     ),
                   ),
 
                   Container (
                     height: MediaQuery.of(context).size.height/20,
                     width: MediaQuery.of(context).size.width/1.5,            
-                    child: const TextField(
-                      decoration: InputDecoration(
+                    child: TextField(
+                      decoration: const InputDecoration(
                         fillColor: Color.fromRGBO(250, 250, 250, 1),
                         filled: true,
                         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -105,15 +109,16 @@ class _WalletPopupWidget extends State<WalletPopupWidget> {
                           color: ApplicationColors.Primary_900
                         ),
                       ),
-                      style: TextStyle(color: ApplicationColors.Primary_900),
+                      controller: _accountNameController,
+                      style: const TextStyle(color: ApplicationColors.Primary_900),
                     ),
                   ),
 
                   Container (
                     height: MediaQuery.of(context).size.height/20,
                     width: MediaQuery.of(context).size.width/1.5,            
-                    child: const TextField(
-                      decoration: InputDecoration(
+                    child: TextField(
+                      decoration: const InputDecoration(
                         fillColor: ApplicationColors.Base_White,
                         filled: true,
                         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -132,7 +137,8 @@ class _WalletPopupWidget extends State<WalletPopupWidget> {
                           color: ApplicationColors.Primary_900
                         ),
                       ),
-                      style: TextStyle(color: ApplicationColors.Primary_900),
+                      controller: _amountController,
+                      style: const TextStyle(color: ApplicationColors.Primary_900),
                     ),
                   ),
                   SizedBox(
@@ -146,7 +152,7 @@ class _WalletPopupWidget extends State<WalletPopupWidget> {
                       child: SlideAction(
                         sliderRotate: false,
                         sliderButtonIconSize: MediaQuery.of(context).size.height/35,
-                        sliderButtonIcon: Icon(
+                        sliderButtonIcon: const Icon(
                           Icons.keyboard_arrow_right_outlined,
                           color: ApplicationColors.Secondary_100,
                         ),

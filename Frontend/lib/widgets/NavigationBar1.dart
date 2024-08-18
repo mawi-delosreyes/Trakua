@@ -4,13 +4,16 @@ import './WalletPopup.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NavigationBar1 extends StatefulWidget {
-  const NavigationBar1({super.key});
+  final String addOrEdit;
+  
+  NavigationBar1({Key? key, required this.addOrEdit}) : super(key: key);
 
   @override
   State<NavigationBar1> createState() => _NavigationBar1State();
 }
 
 class _NavigationBar1State extends State<NavigationBar1> {
+
   @override
   Widget build(BuildContext context) {
     return Row (
@@ -85,13 +88,13 @@ class _NavigationBar1State extends State<NavigationBar1> {
                       context: context,
                       builder: (context) => WalletPopupWidget(),
                     );
-                  },
+                  },  
                   child: Container(
                       child: FractionallySizedBox (
                         widthFactor: 0.5,
                         heightFactor: 0.5,
                         child: SvgPicture.asset(
-                          'assets/icons/edit.svg',
+                          widget.addOrEdit.contains("add") ? 'assets/icons/plus.svg' : 'assets/icons/edit.svg',
                           color: ApplicationColors.Secondary_900),
                       ),
                     decoration: BoxDecoration(
