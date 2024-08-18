@@ -12,4 +12,11 @@ class LocalInitRepoImpl implements LocalInitRepo{
   Future<Database> initializeDB() async {
     return ChibaoDao().dbHelper.getDatabase;
   }
+
+  @override
+  Future<Map<String, Object?>> initializeUser() async {
+    Database db = await ChibaoDao().dbHelper.getDatabase;
+    final details = await db.rawQuery("SELECT user_id FROM Profile_Details");
+    return details.first;
+  }
 }

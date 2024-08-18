@@ -4,7 +4,12 @@ import 'package:frontend/widgets/NavigationBar1.dart';
 import '../widgets/WalletCards.dart';
 
 class WalletScreen extends StatefulWidget {
-  const WalletScreen({super.key});
+  final int user_id;
+
+  WalletScreen({
+    Key? key,
+    required this.user_id
+  });
 
   @override 
   State<WalletScreen> createState() => _WalletScreenState();
@@ -15,9 +20,11 @@ class _WalletScreenState extends State<WalletScreen> {
   int selectedIndex = -1;
   String addOrEdit = "add";
 
-
   @override
   Widget build(BuildContext context) {
+    int user_id = widget.user_id;
+    print(user_id);
+
     return MaterialApp(
         title: 'Chibao',
         debugShowCheckedModeBanner: false,
