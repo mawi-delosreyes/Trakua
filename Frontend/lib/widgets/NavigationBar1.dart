@@ -5,8 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class NavigationBar1 extends StatefulWidget {
   final String addOrEdit;
+  var wallet_id;
+  final int user_id;
   
-  NavigationBar1({Key? key, required this.addOrEdit}) : super(key: key);
+  NavigationBar1({Key? key, required this.addOrEdit, this.wallet_id, required this.user_id}) : super(key: key);
 
   @override
   State<NavigationBar1> createState() => _NavigationBar1State();
@@ -86,7 +88,7 @@ class _NavigationBar1State extends State<NavigationBar1> {
                   onTap: () {
                     showDialog(
                       context: context,
-                      builder: (context) => WalletPopupWidget(),
+                      builder: (context) => WalletPopupWidget(user_id: widget.user_id, wallet_id: widget.wallet_id),
                     );
                   },  
                   child: Container(

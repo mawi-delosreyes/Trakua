@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'screens/TemplateScreen.dart';
 import 'screens/ProfileScreen.dart';
 import 'screens/WalletScreen.dart';
-import 'package:frontend/repository/LocalInitRepoImpl.dart';
+import 'package:frontend/repository/LocalInitRepo.dart';
 
 
 void main() async {
@@ -17,10 +17,10 @@ void main() async {
 
 class initialize {
   void initState() {
-    LocalInitRepoImpl().initializeDB();
+    LocalInitRepo().initializeDB();
   }
 
   Future<Map<String, Object?>> initializeUser() {
-    return LocalInitRepoImpl().initializeUser();
+    return LocalInitRepo().initializeUser();
   }
 }

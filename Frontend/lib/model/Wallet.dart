@@ -12,13 +12,13 @@ class Wallet {
   final int wallet_id;
   final int user_id;
   final String wallet_name;
-  final int last_sync;
+  final String last_sync;
 
   Wallet({
     required this.wallet_id,
     required this.user_id,
     required this.wallet_name,
-    required this.last_sync
+    this.last_sync = ""
   });
 
   Map<String, dynamic> toMap(){
@@ -35,7 +35,7 @@ class Wallet {
       wallet_id: map["wallet_id"] as int, 
       user_id: map["user_id"] as int, 
       wallet_name: map["wallet_name"] as String, 
-      last_sync: map["last_sync"] as int
+      last_sync: map["last_sync"] as String
     );
   }
 }
