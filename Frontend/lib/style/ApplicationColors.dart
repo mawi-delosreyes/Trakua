@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class ApplicationColors {
   static const Background = Color(0xFFF9FFFD);
+  static const Background_90Opacity = Color(0xE6F9FFFD);
 
   static const Primary = Color(0xFF24B46D);
   static const Primary_100 = Color(0xFFDCF8EA);
@@ -39,3 +40,29 @@ class ApplicationColors {
   static const Orange_100 = Color(0xFFF4C790);
   static const Orange_300 = Color(0xFFCC7914);
 }
+
+
+/*
+Opacity Values
+100% — FF
+95% — F2
+90% — E6
+85% — D9
+80% — CC
+75% — BF
+70% — B3
+65% — A6
+60% — 99
+55% — 8C
+50% — 80
+45% — 73
+40% — 66
+35% — 59
+30% — 4D
+25% — 40
+20% — 33
+15% — 26
+10% — 1A
+5% — 0D
+0% — 00
+*/

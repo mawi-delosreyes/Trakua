@@ -75,12 +75,12 @@ class _WalletScreenState extends State<WalletScreen> {
                                 
                                 if(position == -1) {
                                   addOrEdit = "add";
+                                  wallet_id = null;
                                 } else {
                                   addOrEdit = "edit";
+                                  wallet_id = walletList.data?.elementAt(position).wallet_id;
                                 }
-                      
-                                selectedIndex = position;
-                                wallet_id = walletList.data?.elementAt(position).wallet_id;
+                                selectedIndex = position;                                
                               });
                             },
                             child: Container (
