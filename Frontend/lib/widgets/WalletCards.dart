@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/model/Accounts.dart';
 import 'package:frontend/model/Wallet.dart';
+import 'package:frontend/repository/AccountsRepo.dart';
 import 'package:frontend/style/ApplicationColors.dart';
 
 
@@ -50,8 +52,33 @@ class _WalletCardWidget extends State<WalletCardWidget> {
                     widget.walletData.elementAt(widget.position).wallet_name,
                     style: const TextStyle(
                       color: ApplicationColors.Primary_1000
-                    ),)
-                  ),
+                    ),
+                  )
+                ),
+
+                FutureBuilder(
+                  future: AccountsRepo().getAccounts(widget.walletData.elementAt(widget.position).wallet_id), 
+                  builder: (BuildContext context, AsyncSnapshot<List<Accounts>> accountList) {
+                    if (accountList.hasData) {
+                      return ListView.separated(
+                        itemCount: accountList.data!.length, 
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Row(
+                            children:[
+                              Text(accountList.data!.elementAt(index).account_name),
+                              SizedBox(width: MediaQuery.of(context).size.width/5,),
+                              Text(accountList.data!.elementAt(index).account_balance.toString() + " / " + accountList.data!.elementAt(index).account_total_balance.toString()),
+                            ],
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) => SizedBox(height: MediaQuery.of(context).size.height/60,),          
+                      );
+                    } else { return Container(); }
+                  }
+                )
+
+
               ],
             ),   
           ),
