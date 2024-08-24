@@ -86,10 +86,19 @@ class _NavigationBar1State extends State<NavigationBar1> {
               child: 
                 InkWell(
                   onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => WalletPopupWidget(user_id: widget.user_id, wallet_id: widget.wallet_id),
-                    );
+                    if (widget.wallet_id == null) {
+                      showDialog(
+                        barrierColor: ApplicationColors.Background_90Opacity,
+                        context: context,
+                        builder: (context) => AddWalletPopupWidget(user_id: widget.user_id),
+                      );
+                    } else {
+                      showDialog(
+                        barrierColor: ApplicationColors.Background_90Opacity,
+                        context: context,
+                        builder: (context) => EditWalletPopupWidget(user_id: widget.user_id, wallet_id: widget.wallet_id),
+                      );
+                    }     
                   },  
                   child: Container(
                       child: FractionallySizedBox (

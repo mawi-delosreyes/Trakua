@@ -8,6 +8,7 @@ class AccountsTable {
           wallet_id INTEGER,
           account_name TEXT, 
           account_balance REAL,
+          account_total_balance REAL,
           last_sync INTEGER
       );
     ''');

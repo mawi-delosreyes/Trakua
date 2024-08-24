@@ -58,7 +58,6 @@ class _WalletScreenState extends State<WalletScreen> {
                 child: FutureBuilder(
                   future: WalletRepo().getWallets(), 
                   builder: (BuildContext context, AsyncSnapshot<List<Wallet>> walletList) {
-                    
                     if(walletList.hasData) {                  
                       return ListView.builder(
                         padding: EdgeInsets.zero,
@@ -75,12 +74,12 @@ class _WalletScreenState extends State<WalletScreen> {
                                 
                                 if(position == -1) {
                                   addOrEdit = "add";
+                                  wallet_id = null;
                                 } else {
                                   addOrEdit = "edit";
+                                  wallet_id = walletList.data?.elementAt(position).wallet_id;
                                 }
-                      
-                                selectedIndex = position;
-                                wallet_id = walletList.data?.elementAt(position).wallet_id;
+                                selectedIndex = position;                                
                               });
                             },
                             child: Container (
