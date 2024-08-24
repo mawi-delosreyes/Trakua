@@ -58,7 +58,6 @@ class _WalletScreenState extends State<WalletScreen> {
                 child: FutureBuilder(
                   future: WalletRepo().getWallets(), 
                   builder: (BuildContext context, AsyncSnapshot<List<Wallet>> walletList) {
-                    
                     if(walletList.hasData) {                  
                       return ListView.builder(
                         padding: EdgeInsets.zero,
