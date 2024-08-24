@@ -25,7 +25,6 @@ class _WalletScreenState extends State<WalletScreen> {
 
   @override
   Widget build(BuildContext context) {
-    int user_id = widget.user_id;
 
     return MaterialApp(
         title: 'Chibao',

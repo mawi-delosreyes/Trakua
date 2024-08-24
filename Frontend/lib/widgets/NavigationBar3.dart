@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/style/ApplicationColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:frontend/widgets/ProfileDetails.dart';
 
 class NavigationBar3 extends StatefulWidget {
   final TextEditingController firstNameController;

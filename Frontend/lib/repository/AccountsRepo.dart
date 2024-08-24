@@ -1,6 +1,5 @@
 import 'package:frontend/database/dao/ChibaoDao.dart';
 import 'package:frontend/model/Accounts.dart';
-import 'package:frontend/model/Wallet.dart';
 import 'package:sqflite/sqflite.dart';
 
 class AccountsRepo{

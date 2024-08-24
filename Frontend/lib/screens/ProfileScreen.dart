@@ -4,7 +4,6 @@ import 'package:frontend/style/ApplicationColors.dart';
 import 'package:frontend/widgets/NavigationBar3.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-import 'package:frontend/repository/LocalInitRepo.dart';
 import 'package:frontend/widgets/ProfileDetails.dart';
 
 class ProfileScreen extends StatefulWidget {

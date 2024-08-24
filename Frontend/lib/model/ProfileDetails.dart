@@ -1,6 +1,3 @@
-import 'dart:ffi';
-import 'dart:typed_data';
-
 class Fields {
   static const String user_id = "user_id";
   static const String first_name = "first_name";
