@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:frontend/model/Accounts.dart';
@@ -245,8 +246,11 @@ class _EditWalletPopupWidget extends State<EditWalletPopupWidget> {
 
   List<TextEditingController> _accountNameControllerList = [];
   List<TextEditingController> _amountControllerList = [];
+  TextEditingController _newAccountNameController = TextEditingController();
+  TextEditingController _newAmountController = TextEditingController();
   List updatedControllers = [];
   bool updateWalletName = false;
+  bool newAccount = false;
 
   @override
   Widget build(BuildContext context) {
@@ -257,12 +261,16 @@ class _EditWalletPopupWidget extends State<EditWalletPopupWidget> {
           final _walletNameController = TextEditingController(text: (walletInfo.data==null? "": walletInfo.data!.first.wallet_name) as String);
 
           return Dialog(
+            elevation: 0,
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8))
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+              side: BorderSide(
+                color: ApplicationColors.Neutrals_200
+              )
             ),
             backgroundColor: ApplicationColors.Background,
             child: Container(
-              height: MediaQuery.of(context).size.height/2,
+              height: MediaQuery.of(context).size.height/1.5,
               width: MediaQuery.of(context).size.width/1.1,
               child: Column(
                 children: [
@@ -286,11 +294,11 @@ class _EditWalletPopupWidget extends State<EditWalletPopupWidget> {
                   const Text("Edit Wallet"),
 
                   SizedBox(
-                    height: MediaQuery.of(context).size.height/50,
+                    height: MediaQuery.of(context).size.height/40,
                   ),
                   
                   Container(
-                    height: MediaQuery.of(context).size.height/3.2,
+                    height: MediaQuery.of(context).size.height/2.5,
                     child: Column(
                       children: [
 
@@ -324,7 +332,7 @@ class _EditWalletPopupWidget extends State<EditWalletPopupWidget> {
                         ),
 
                         SizedBox(
-                          height: MediaQuery.of(context).size.height/70,
+                          height: MediaQuery.of(context).size.height/40,
                         ),
 
                         FutureBuilder(
@@ -332,7 +340,7 @@ class _EditWalletPopupWidget extends State<EditWalletPopupWidget> {
                           builder: (BuildContext context, AsyncSnapshot<List<Accounts>> accountList) {
                             if(accountList.hasData) {
 
-                              return ListView.builder(
+                              return ListView.separated(
                                 padding: EdgeInsets.zero,
                                 scrollDirection: Axis.vertical,
                                 shrinkWrap: true,
@@ -340,7 +348,6 @@ class _EditWalletPopupWidget extends State<EditWalletPopupWidget> {
                                 itemBuilder:(BuildContext context, int index) {
                                   _accountNameControllerList = List.filled(accountList.data!.length, TextEditingController(text: accountList.data!.elementAt(index).account_name as String));
                                   _amountControllerList = List.filled(accountList.data!.length, TextEditingController(text: accountList.data!.elementAt(index).account_balance.toString()));
-
                                   return Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -415,7 +422,7 @@ class _EditWalletPopupWidget extends State<EditWalletPopupWidget> {
                                       )
                                     ],
                                   );
-                                }
+                                }, separatorBuilder: (BuildContext context, int index) => SizedBox(height: MediaQuery.of(context).size.height/60,),
                               );
                             } else {
                               return Container();
@@ -426,8 +433,78 @@ class _EditWalletPopupWidget extends State<EditWalletPopupWidget> {
                     ),
                   ),
 
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: MediaQuery.of(context).size.height/20,
+                        width: MediaQuery.of(context).size.width/2.7,              
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                            fillColor: ApplicationColors.Base_White,
+                            filled: true,
+                            floatingLabelBehavior: FloatingLabelBehavior.always,
+                            labelText: "New Account Name",
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: ApplicationColors.Neutrals_300
+                              )
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                    color: ApplicationColors.Secondary_900,
+                              ),
+                            ),
+                            labelStyle: TextStyle(
+                              color: ApplicationColors.Primary_900
+                            ),
+                          ),
+                          style: const TextStyle(color: ApplicationColors.Primary_900),
+                          controller: _newAccountNameController,
+                          onChanged: (value) => newAccount=true,
+                        )
+                      ),
+                  
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width/30,
+                      ),
+                  
+                      Container(
+                        height: MediaQuery.of(context).size.height/20,
+                        width: MediaQuery.of(context).size.width/3.5,            
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                            fillColor: ApplicationColors.Base_White,
+                            filled: true,
+                            floatingLabelBehavior: FloatingLabelBehavior.always,
+                            labelText: "Amount",
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: ApplicationColors.Neutrals_300
+                              )
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                    color: ApplicationColors.Secondary_900,
+                              ),
+                            ),
+                            labelStyle: TextStyle(
+                              color: ApplicationColors.Primary_900
+                            ),
+                          ),
+                          style: const TextStyle(color: ApplicationColors.Primary_900),
+                          controller: _newAmountController,
+                          onChanged: (value) {
+                            if (!newAccount){ newAccount = true; }
+                          },
+                        )
+                      )
+                    ],
+                  ),
+
                   SizedBox(
-                    height: MediaQuery.of(context).size.height/70,
+                    height: MediaQuery.of(context).size.height/30,
                   ),
 
                   Container(
@@ -463,16 +540,27 @@ class _EditWalletPopupWidget extends State<EditWalletPopupWidget> {
                             WalletRepo().updateExistingWallet(walletMap);
                           }
 
-                          updateAccountIdx.forEach((index, acc_id) {
+                          if(newAccount){
                             Map<String, Object> accountMap = {
-                              "account_id": acc_id,
-                              "wallet_id": widget.wallet_id,
-                              "account_name": _accountNameControllerList.elementAt(index).text,
-                              "account_balance": _amountControllerList.elementAt(index).text,
-                              "last_sync": DateTime.now().millisecondsSinceEpoch
-                            };
-                            AccountsRepo().updateExistingAccount(accountMap);
-                          });
+                                "wallet_id": widget.wallet_id,
+                                "account_name": _newAccountNameController.text,
+                                "account_balance": _newAmountController.text,
+                                "last_sync": DateTime.now().millisecondsSinceEpoch
+                              };
+                              AccountsRepo().saveNewAccount(accountMap);
+                          }
+                          else {
+                            updateAccountIdx.forEach((index, acc_id) {
+                              Map<String, Object> accountMap = {
+                                "account_id": acc_id,
+                                "wallet_id": widget.wallet_id,
+                                "account_name": _accountNameControllerList.elementAt(index).text,
+                                "account_balance": _amountControllerList.elementAt(index).text,
+                                "last_sync": DateTime.now().millisecondsSinceEpoch
+                              };
+                              AccountsRepo().updateExistingAccount(accountMap);
+                            });
+                          }
 
                           Navigator.push(
                             context, 
