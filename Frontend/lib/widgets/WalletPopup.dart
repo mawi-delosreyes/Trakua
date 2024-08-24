@@ -192,7 +192,7 @@ class _AddWalletPopupWidget extends State<AddWalletPopupWidget> {
                             Map<String, Object> accountMap = {
                               "wallet_id": wallet_id,
                               "account_name": _accountNameController.text,
-                              "account_balance": _amountController.text,
+                              "account_total_balance": _amountController.text,
                               "last_sync": DateTime.now().millisecondsSinceEpoch
                             };
 
@@ -347,7 +347,7 @@ class _EditWalletPopupWidget extends State<EditWalletPopupWidget> {
                                 itemCount: accountList.data!.length,
                                 itemBuilder:(BuildContext context, int index) {
                                   _accountNameControllerList = List.filled(accountList.data!.length, TextEditingController(text: accountList.data!.elementAt(index).account_name as String));
-                                  _amountControllerList = List.filled(accountList.data!.length, TextEditingController(text: accountList.data!.elementAt(index).account_balance.toString()));
+                                  _amountControllerList = List.filled(accountList.data!.length, TextEditingController(text: accountList.data!.elementAt(index).account_total_balance.toString()));
                                   return Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -544,7 +544,7 @@ class _EditWalletPopupWidget extends State<EditWalletPopupWidget> {
                             Map<String, Object> accountMap = {
                                 "wallet_id": widget.wallet_id,
                                 "account_name": _newAccountNameController.text,
-                                "account_balance": _newAmountController.text,
+                                "account_total_balance": _newAmountController.text,
                                 "last_sync": DateTime.now().millisecondsSinceEpoch
                               };
                               AccountsRepo().saveNewAccount(accountMap);
@@ -555,7 +555,7 @@ class _EditWalletPopupWidget extends State<EditWalletPopupWidget> {
                                 "account_id": acc_id,
                                 "wallet_id": widget.wallet_id,
                                 "account_name": _accountNameControllerList.elementAt(index).text,
-                                "account_balance": _amountControllerList.elementAt(index).text,
+                                "account_total_balance": _amountControllerList.elementAt(index).text,
                                 "last_sync": DateTime.now().millisecondsSinceEpoch
                               };
                               AccountsRepo().updateExistingAccount(accountMap);
