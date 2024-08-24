@@ -192,6 +192,7 @@ class _AddWalletPopupWidget extends State<AddWalletPopupWidget> {
                             Map<String, Object> accountMap = {
                               "wallet_id": wallet_id,
                               "account_name": _accountNameController.text,
+                              "account_balance": _amountController.text,
                               "account_total_balance": _amountController.text,
                               "last_sync": DateTime.now().millisecondsSinceEpoch
                             };
@@ -339,7 +340,6 @@ class _EditWalletPopupWidget extends State<EditWalletPopupWidget> {
                           future: AccountsRepo().getAccounts(widget.wallet_id), 
                           builder: (BuildContext context, AsyncSnapshot<List<Accounts>> accountList) {
                             if(accountList.hasData) {
-
                               return ListView.separated(
                                 padding: EdgeInsets.zero,
                                 scrollDirection: Axis.vertical,
@@ -544,6 +544,7 @@ class _EditWalletPopupWidget extends State<EditWalletPopupWidget> {
                             Map<String, Object> accountMap = {
                                 "wallet_id": widget.wallet_id,
                                 "account_name": _newAccountNameController.text,
+                                "account_balance": _newAmountController.text,
                                 "account_total_balance": _newAmountController.text,
                                 "last_sync": DateTime.now().millisecondsSinceEpoch
                               };
