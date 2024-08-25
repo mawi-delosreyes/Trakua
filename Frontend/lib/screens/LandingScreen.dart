@@ -13,5 +13,8 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreen extends State<LandingScreen> {
-  
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
 }
