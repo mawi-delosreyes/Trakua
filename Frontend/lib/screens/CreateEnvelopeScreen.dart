@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/style/ApplicationColors.dart';
+import 'package:frontend/widgets/CreateSubEnvelopePopup.dart';
 import 'package:frontend/widgets/NavigationBar1.dart';
 import 'package:frontend/widgets/NavigationBar2.dart';
 import 'package:frontend/widgets/NavigationBar4.dart';
@@ -8,7 +9,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class CreateEnvelope extends StatefulWidget {
   final int user_id;
-
+  static final navKey = new GlobalKey<NavigatorState>();
+  
   CreateEnvelope({
     Key? key,
     required this.user_id
@@ -23,7 +25,7 @@ class _CreateEnvelope extends State<CreateEnvelope> {
   List<String> envelopeTypeList = ["Savings", "Expenses"];
   String envelopeType = "Savings";
   bool _swapType = true;
-  TextEditingController envelope_name = TextEditingController(text: "Envelope Name");
+  TextEditingController _envelopeNameController = TextEditingController();
 
 
   @override
@@ -33,6 +35,7 @@ class _CreateEnvelope extends State<CreateEnvelope> {
       title: "Chibao",
       theme: ThemeData(useMaterial3: false,),
       debugShowCheckedModeBanner: false,
+      navigatorKey: CreateEnvelope.navKey,
       home: Scaffold(
         backgroundColor: ApplicationColors.Background,
         body:Center(
@@ -63,8 +66,9 @@ class _CreateEnvelope extends State<CreateEnvelope> {
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: ApplicationColors.Secondary_300)
                           ),
+                          hintText: "Envelope Name"
                         ),
-                        controller: envelope_name,
+                        controller: _envelopeNameController,
                       ),
                     ),
                     
@@ -102,21 +106,44 @@ class _CreateEnvelope extends State<CreateEnvelope> {
                               child: const Text("Sub-Envelopes"),
                             ),
 
-                            Container(height:  MediaQuery.of(context).size.height/60,),
+                            Container(height: MediaQuery.of(context).size.height/60,),
 
                             Container(
                             padding: EdgeInsets.only(left: MediaQuery.of(context).size.height/40),
                               child: Row(
                                 children: <Widget>[
                                   InkWell(
-                                    child: SvgPicture.asset(
-                                      height:  MediaQuery.of(context).size.height/30,
-                                      width: MediaQuery.of(context).size.width/30,
-                                      'assets/icons/add.svg',
-                                      fit: BoxFit.scaleDown,
-                                      color: ApplicationColors.Secondary_600
+                                    child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        Container(
+                                          height: MediaQuery.of(context).size.height/15,
+                                          width: MediaQuery.of(context).size.width/10,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                                            border: Border.all(
+                                              color: ApplicationColors.Secondary_600
+                                            ),
+                                            color: ApplicationColors.Secondary_100
+                                          ),
+                                        ),
+                                        SvgPicture.asset(
+                                          height:  MediaQuery.of(context).size.height/50,
+                                          width: MediaQuery.of(context).size.width/50,
+                                          'assets/icons/add.svg',
+                                          fit: BoxFit.scaleDown,
+                                          color: ApplicationColors.Secondary_600
+                                        ),
+                                      ],
                                     ),
-                                    onTap: (){},
+                                    onTap: (){
+                                      showDialog(
+                                        barrierColor: ApplicationColors.Background_90Opacity,
+                                        context: CreateEnvelope.navKey.currentState!.overlay!.context,
+                                        builder: (context) => CreateSubEnvelopePopupWidget(user_id: widget.user_id),
+                                      );
+
+                                    },
                                   ),
                                 ],
                               )
@@ -144,7 +171,7 @@ class _CreateEnvelope extends State<CreateEnvelope> {
 
               Expanded(
                 flex: 15,
-                child: NavigationBar4()
+                child: NavigationBar4(envelope_name: _envelopeNameController,)
               )
 
             ],
