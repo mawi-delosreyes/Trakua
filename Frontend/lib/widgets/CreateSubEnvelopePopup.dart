@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:frontend/repository/SubEnvelopeRepo.dart';
+import 'package:frontend/screens/CreateEnvelopeScreen.dart';
 import 'package:frontend/style/ApplicationColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slide_to_act/slide_to_act.dart';
@@ -323,13 +325,13 @@ class _CreateSubEnvelopePopupWidget extends State<CreateSubEnvelopePopupWidget> 
                             scale: 0.5,
                             child: CupertinoSwitch(
                             activeColor: ApplicationColors.Primary,
-                            value: manual_topup, 
+                            value: roll_over, 
                             onChanged: (bool value) {
                               setState(() {
-                                manual_topup = value;
+                                roll_over = value;
                               });
                             })
-                          )                          
+                          )
                         )
                       ],
                     ),
@@ -360,7 +362,25 @@ class _CreateSubEnvelopePopupWidget extends State<CreateSubEnvelopePopupWidget> 
                         textStyle: const TextStyle(
                           color: ApplicationColors.Primary
                         ),
-                        onSubmit: () async {},
+                        onSubmit: () async {
+
+                          Map<String, Object> subEnvelopeMap = {
+                            "sub_envelope_name": _subEnvelopeNameController.text,
+                            "sub_envelope_total_balance": _amountController.text,
+                            "sub_envelope_balance": 0,
+                            "envelope_id": 2,
+                            "category": dropdownValue,
+                            "roll_over": roll_over ? 1:0,
+                            "last_sync": DateTime.now().millisecondsSinceEpoch
+                          };
+
+                          SubEnvelopeRepo().saveNewSubEnvelope(subEnvelopeMap);
+                          Navigator.push(
+                            context, 
+                            new MaterialPageRoute(builder: (context) => CreateEnvelopeScreen(user_id: widget.user_id,))
+                          );
+
+                        },
                       ),
                     )
                   )

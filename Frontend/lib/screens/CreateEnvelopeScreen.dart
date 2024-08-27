@@ -7,20 +7,20 @@ import 'package:frontend/widgets/NavigationBar4.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class CreateEnvelope extends StatefulWidget {
+class CreateEnvelopeScreen extends StatefulWidget {
   final int user_id;
   static final navKey = new GlobalKey<NavigatorState>();
   
-  CreateEnvelope({
+  CreateEnvelopeScreen({
     Key? key,
     required this.user_id
   });
 
   @override
-  State<CreateEnvelope> createState() => _CreateEnvelope();
+  State<CreateEnvelopeScreen> createState() => _CreateEnvelopeScreen();
 }
 
-class _CreateEnvelope extends State<CreateEnvelope> {
+class _CreateEnvelopeScreen extends State<CreateEnvelopeScreen> {
 
   List<String> envelopeTypeList = ["Savings", "Expenses"];
   String envelopeType = "Savings";
@@ -35,7 +35,7 @@ class _CreateEnvelope extends State<CreateEnvelope> {
       title: "Chibao",
       theme: ThemeData(useMaterial3: false,),
       debugShowCheckedModeBanner: false,
-      navigatorKey: CreateEnvelope.navKey,
+      navigatorKey: CreateEnvelopeScreen.navKey,
       home: Scaffold(
         backgroundColor: ApplicationColors.Background,
         body:Center(
@@ -139,7 +139,7 @@ class _CreateEnvelope extends State<CreateEnvelope> {
                                     onTap: (){
                                       showDialog(
                                         barrierColor: ApplicationColors.Background_90Opacity,
-                                        context: CreateEnvelope.navKey.currentState!.overlay!.context,
+                                        context: CreateEnvelopeScreen.navKey.currentState!.overlay!.context,
                                         builder: (context) => CreateSubEnvelopePopupWidget(user_id: widget.user_id),
                                       );
 
