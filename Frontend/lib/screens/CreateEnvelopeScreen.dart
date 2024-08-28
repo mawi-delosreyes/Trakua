@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/model/SubEnvelope.dart';
+import 'package:frontend/repository/SubEnvelopeRepo.dart';
 import 'package:frontend/style/ApplicationColors.dart';
 import 'package:frontend/widgets/CreateSubEnvelopePopup.dart';
 import 'package:frontend/widgets/NavigationBar1.dart';
@@ -100,7 +102,7 @@ class _CreateEnvelopeScreen extends State<CreateEnvelopeScreen> {
                         padding: EdgeInsets.only(left: MediaQuery.of(context).size.height/30),
                         height: MediaQuery.of(context).size.height/5,
                         child: Column(
-                          children: [
+                          children: <Widget>[
                             Container(
                               alignment: Alignment.centerLeft,
                               child: const Text("Sub-Envelopes"),
@@ -109,8 +111,9 @@ class _CreateEnvelopeScreen extends State<CreateEnvelopeScreen> {
                             Container(height: MediaQuery.of(context).size.height/60,),
 
                             Container(
-                            padding: EdgeInsets.only(left: MediaQuery.of(context).size.height/40),
+                              padding: EdgeInsets.only(left: MediaQuery.of(context).size.height/40),
                               child: Row(
+                                mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   InkWell(
                                     child: Stack(
@@ -145,6 +148,58 @@ class _CreateEnvelopeScreen extends State<CreateEnvelopeScreen> {
 
                                     },
                                   ),
+
+                                  SizedBox(width: MediaQuery.of(context).size.width/40,),
+
+                                  Expanded(
+                                    child: FutureBuilder(
+                                      future: SubEnvelopeRepo().getSubEnvelopes(),
+                                      builder: (BuildContext context, AsyncSnapshot<List<SubEnvelope>> subEnvelopeList) {
+                                        if(subEnvelopeList.hasData){
+                                          return SizedBox(
+                                            height: 100,
+                                            child: ListView.separated(
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.horizontal,
+                                              itemCount: subEnvelopeList.data!.length,
+                                              itemBuilder: (BuildContext context, int index) =>
+                                                Container(
+                                                  height: MediaQuery.of(context).size.height/10,
+                                                  width: MediaQuery.of(context).size.width/5,
+                                                  decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                                                  border: Border.all(
+                                                    color: ApplicationColors.Primary
+                                                  ),
+                                                  color: ApplicationColors.Primary_200,
+                                                  ),
+                                                  child: Column(
+                                                    children: <Widget>[
+                                                      SizedBox(
+                                                        height: MediaQuery.of(context).size.height/30,
+                                                      ),
+                                                      Container(
+                                                        child: Column(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: <Widget>[
+                                                            Text(subEnvelopeList.data!.elementAt(index).sub_envelope_balance.toString()),
+                                                            Text(subEnvelopeList.data!.elementAt(index).sub_envelope_name)
+                                                          ],
+                                                        )
+                                                      )
+                                                    ],
+                                                  ),
+                                                ), 
+                                              separatorBuilder: (BuildContext context, int index) => SizedBox(width: MediaQuery.of(context).size.width/35,)
+                                                
+                                            )
+                                          );
+                                        } else{
+                                          return Container();
+                                        }
+                                      }
+                                    )
+                                  )
                                 ],
                               )
                             )
@@ -160,7 +215,7 @@ class _CreateEnvelopeScreen extends State<CreateEnvelopeScreen> {
                           children: <Widget>[
                             Container(
                               alignment: Alignment.centerLeft,
-                              child: const Text("Transactions"),
+                              child: const Text("Transactions"),  
                             ),
                           ],
                         ),
