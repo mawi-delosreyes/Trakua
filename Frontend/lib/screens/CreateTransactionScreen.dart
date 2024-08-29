@@ -126,6 +126,7 @@ class _CreateTransactionScreen extends State<CreateTransactionScreen> {
                             onTap: (){
                               setState(() {
                                 expandedList[index] = !expandedList.elementAt(index);
+                                tapSubEnvelope = List.filled(2, false);
                               });
                             },
                             child: Container(
