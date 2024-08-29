@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/model/Envelope.dart';
 import 'package:frontend/model/SubEnvelope.dart';
+import 'package:frontend/repository/EnvelopeRepo.dart';
 import 'package:frontend/repository/SubEnvelopeRepo.dart';
 import 'package:frontend/style/ApplicationColors.dart';
 import 'package:frontend/widgets/CreateSubEnvelopePopup.dart';
@@ -29,7 +31,9 @@ class CreateTransactionScreen extends StatefulWidget {
 class _CreateTransactionScreen extends State<CreateTransactionScreen> {
   int switch_index = 0;
   bool recurring_transaction = false;
-  List<bool> expandedList = List.filled(8, false);
+  List<bool> expandedList = List.filled(1, false);
+  List<bool> tapSubEnvelope = List.filled(2, false);
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +43,7 @@ class _CreateTransactionScreen extends State<CreateTransactionScreen> {
     var formatter = DateFormat('yyyy/MM/dd');
     var topupDate = formatter.format(DateTime.now());
     String dropdownValue = accountsList.first;
+
 
     return MaterialApp(
       title: "Chibao",
@@ -105,33 +110,120 @@ class _CreateTransactionScreen extends State<CreateTransactionScreen> {
                 height: MediaQuery.of(context).size.height/3,
                 child: RotatedBox(
                   quarterTurns: 3,
-                  child: ListView.separated(
-                    padding: EdgeInsets.zero,
-                    physics: 8 <= 8? AlwaysScrollableScrollPhysics() : NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: 8,
-                    itemBuilder: (BuildContext context, int index) =>
-                    GestureDetector(
-                      onTap: (){
-                        setState(() {
-                          expandedList[index] = !expandedList.elementAt(index);
-                        });
-                      },
-                      child: Container(
-                        alignment: Alignment.topCenter,
-                        height: expandedList.elementAt(index)? MediaQuery.of(context).size.height/4: MediaQuery.of(context).size.height/25,
-                        width: MediaQuery.of(context).size.width/2,
-                        child: expandedList.elementAt(index)?Text("Expanded"): Text("Collapsed"),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(8)),
-                          border: Border.all(
-                            color: ApplicationColors.Primary_1000
+                  child: FutureBuilder(
+                    future: EnvelopeRepo().getEnvelopes(), 
+                    builder: (BuildContext context, AsyncSnapshot<List<Envelope>> envelopeList) {
+                      if(envelopeList.hasData){
+                        int envelopeListSize = envelopeList.data!.length;
+                        
+                        return ListView.separated(
+                          padding: EdgeInsets.zero,
+                          physics: envelopeListSize > 6? AlwaysScrollableScrollPhysics() : NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: envelopeListSize,
+                          itemBuilder: (BuildContext context, int index) =>
+                          GestureDetector(
+                            onTap: (){
+                              setState(() {
+                                expandedList[index] = !expandedList.elementAt(index);
+                              });
+                            },
+                            child: Container(
+                              height: expandedList.elementAt(index)? MediaQuery.of(context).size.height/4: MediaQuery.of(context).size.height/25,
+                              width: MediaQuery.of(context).size.width/2,
+
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(8)),
+                                border: Border.all(
+                                  color: ApplicationColors.Primary_1000
+                                ),
+                                color: ApplicationColors.Primary_100
+                              ),
+
+                              child: expandedList.elementAt(index) ? 
+                                //Expanded
+                                RotatedBox(
+                                  quarterTurns: 1,
+                                  child: Column(
+                                    children: <Widget>[
+                                      Container(
+                                        alignment: Alignment.topLeft,
+                                        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width/15, top: MediaQuery.of(context).size.width/20),
+                                        child: Text(envelopeList.data!.elementAt(index).envelope_name),
+                                      ),
+                                      
+                                      Container(
+                                        height: MediaQuery.of(context).size.height/7,
+                                        width: MediaQuery.of(context).size.width/2,
+                                        child: FutureBuilder(
+                                          future: SubEnvelopeRepo().getSubEnvelopeFromEnvelope(envelopeList.data!.elementAt(index).envelope_id), 
+                                          builder: (BuildContext context, AsyncSnapshot<List<SubEnvelope>> subEnvelopeList) {
+                                            if(subEnvelopeList.hasData){
+                                              return ListView.separated(
+                                                shrinkWrap: true,
+                                                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/40),
+                                                itemCount: subEnvelopeList.data!.length,
+                                                itemBuilder: (BuildContext context, int sub_index) =>
+                                                  GestureDetector(
+                                                    onTap: (){
+                                                      setState((){
+                                                        if(tapSubEnvelope.elementAt(sub_index)) {
+                                                          tapSubEnvelope[sub_index] = false;
+                                                        } else {
+                                                          if(tapSubEnvelope.contains(true)) {
+                                                            int selected = tapSubEnvelope.indexOf(true);
+                                                            tapSubEnvelope[selected] = false;
+                                                          }
+                                                          tapSubEnvelope[sub_index] = true;
+                                                        }                                                      
+                                                      });
+                                                    },
+                                                    child: Container(
+                                                      height: MediaQuery.of(context).size.height/30,
+                                                      child: Text("Sample"),
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.all(Radius.circular(6)),
+                                                        border: Border.all(
+                                                          color: tapSubEnvelope.elementAt(sub_index)? ApplicationColors.Primary_1000 : ApplicationColors.Neutrals_200
+                                                        ),
+                                                        color: tapSubEnvelope.elementAt(sub_index)? ApplicationColors.Primary_400 : ApplicationColors.Secondary_100
+                                                      ),
+                                                      
+                                                    ),
+                                                  ),
+                                                separatorBuilder: (BuildContext context, int index) => SizedBox(height: MediaQuery.of(context).size.height/100,)
+                                              );
+
+                                            } else {
+                                              return Container();  
+                                            }
+
+                                          }
+                                        ),
+                                      )
+                                  
+                                    ],
+                                  )
+                                )
+
+                                :
+                                
+                                //Collapsed
+                                Container(
+                                  padding: EdgeInsets.only(left: MediaQuery.of(context).size.width/15),
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    envelopeList.data!.elementAt(index).envelope_name
+                                  ),
+                                ),
+                            ),
                           ),
-                          color: ApplicationColors.Primary_100
-                        ),
-                      ),
-                    ),
-                    separatorBuilder: (BuildContext context, int index) => SizedBox(height: MediaQuery.of(context).size.height/50,), 
+                          separatorBuilder: (BuildContext context, int index) => SizedBox(height: MediaQuery.of(context).size.height/50,), 
+                        );
+                      } else {
+                        return Container();
+                      }
+                    }
                   ),
                 ),
               ),

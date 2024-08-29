@@ -18,10 +18,15 @@ class SubEnvelopeRepo{
 
   Future<List<SubEnvelope>> getSpecificSubEnvelope(int subEnvelopeId) async{
     Database db = await chibaoDao.dbHelper.getDatabase;
-    final walletInfo = await db.rawQuery("SELECT * FROM Sub_Envelopes WHERE sub_envelope_id=$subEnvelopeId LIMIT 1");
-    return walletInfo.map((element) => SubEnvelope.fromMap(element)).toList();
+    final subEnveloepInfo = await db.rawQuery("SELECT * FROM Sub_Envelopes WHERE sub_envelope_id=$subEnvelopeId LIMIT 1");
+    return subEnveloepInfo.map((element) => SubEnvelope.fromMap(element)).toList();
   }
 
+  Future<List<SubEnvelope>> getSubEnvelopeFromEnvelope(int envelopeId) async{
+    Database db = await chibaoDao.dbHelper.getDatabase;
+    final subEnvelopeList = await db.rawQuery("SELECT * FROM Sub_Envelopes WHERE envelope_id=$envelopeId");
+    return subEnvelopeList.map((element) => SubEnvelope.fromMap(element)).toList();
+  }
   Future<int> updateExistingSubEnvelope(Map<String, Object?>subEnvelopeMap) async {
     int subEnvelopeId = subEnvelopeMap["sub_envelope_id"] as int;
 
