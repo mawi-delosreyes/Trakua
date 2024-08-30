@@ -4,6 +4,7 @@ class Fields {
   static const String sub_envelope_id = "sub_envelope_id";
   static const String transaction_date = "transaction_date";
   static const String transaction_amount = "transaction_amount";
+  static const String category = "cateogry";
   static const String notes = "notes";
   static const String transaction_type = "transaction_type";
   static const String account_id = "account_id";
@@ -12,7 +13,7 @@ class Fields {
   static const String from_sub_envelope_id = "from_sub_envelope_id";
 
 
-  static const List<String> values = [transaction_id, envelope_id, sub_envelope_id, transaction_date, transaction_amount, notes, transaction_type, account_id, from_envelope_id, is_transfer, from_sub_envelope_id];
+  static const List<String> values = [transaction_id, envelope_id, sub_envelope_id, transaction_date, transaction_amount, category, notes, transaction_type, account_id, from_envelope_id, is_transfer, from_sub_envelope_id];
 }
 
 class Transactions {
@@ -21,12 +22,13 @@ class Transactions {
   final int sub_envelope_id;
   final int transaction_date;
   final double transaction_amount;
+  final String category;
   final String notes;
   final String transaction_type;
   final int account_id;
-  final int from_envelope_id;
+  var from_envelope_id;
   final int is_transfer;
-  final int from_sub_envelope_id;
+  var from_sub_envelope_id;
 
   Transactions({
     required this.transaction_id,
@@ -34,12 +36,13 @@ class Transactions {
     required this.sub_envelope_id,
     required this.transaction_date,
     required this.transaction_amount,
+    required this.category,
     required this.notes,
     required this.transaction_type,
     required this.account_id,
-    required this.from_envelope_id,
+    this.from_envelope_id = null,
     required this.is_transfer,
-    required this.from_sub_envelope_id
+    this.from_sub_envelope_id = null
   });
 
   Map<String, dynamic> toMap(){
@@ -49,6 +52,7 @@ class Transactions {
       Fields.sub_envelope_id: sub_envelope_id,
       Fields.transaction_date: transaction_date,
       Fields.transaction_amount: transaction_amount,
+      Fields.category: category,
       Fields.notes: notes,
       Fields.transaction_type: transaction_type,
       Fields.account_id: account_id,
@@ -65,12 +69,13 @@ class Transactions {
       sub_envelope_id: map["sub_envelope_id"] as int,
       transaction_date: map["transaction_date"] as int,
       transaction_amount: map["transaction_amount"] as double,
+      category: map["cateogry"] as String,
       notes: map["notes"] as String,
       transaction_type: map["transaction_type"] as String,
       account_id: map["account_id"] as int,
-      from_envelope_id: map["from_envelope_id"] as int,
+      from_envelope_id: map["from_envelope_id"],
       is_transfer: map["is_transfer"] as int,
-      from_sub_envelope_id: map["from_sub_envelope_id"] as int
+      from_sub_envelope_id: map["from_sub_envelope_id"]
     );
   }
 }

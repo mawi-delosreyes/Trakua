@@ -1,10 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/repository/TransactionRepo.dart';
 import 'package:frontend/style/ApplicationColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NavigationBar4Transaction extends StatefulWidget {
+
+  final int envelope_id;
+  final int sub_envelope_id;
+  final int transaction_date;
+  final double transaction_amount;
+  String category;
+  var notes;
+  final String transaction_type;
+  final int account_id;
+  var from_envelope_id;
+  final int is_transfer;
+  var from_sub_envelope_id;
   
-  NavigationBar4Transaction({Key? key});
+  NavigationBar4Transaction({Key? key, 
+  required this.envelope_id, 
+  required this.sub_envelope_id, 
+  required this.transaction_date,
+  required this.transaction_amount,
+  required this.category,
+  this.notes,
+  required this.transaction_type,
+  required this.account_id,
+  this.from_envelope_id,
+  required this.is_transfer,
+  this.from_sub_envelope_id
+  }) : super(key: key);
+  
 
   @override
   State<NavigationBar4Transaction> createState() => _NavigationBar4TransactionState();
@@ -107,6 +133,21 @@ class _NavigationBar4TransactionState extends State<NavigationBar4Transaction> {
                         ),
                       ),
                       onTap: (){
+                        Map<String, Object> transactionMap = {
+                          "envelope_id": widget.envelope_id,
+                          "sub_envelope_id": widget.sub_envelope_id,
+                          "transaction_date": widget.transaction_date,
+                          "transaction_amount": widget.transaction_amount,
+                          "category": widget.category,
+                          "notes": widget.notes,
+                          "transaction_type": widget.transaction_type,
+                          "account_id": widget.transaction_type,
+                          "from_envelope_id": widget.from_envelope_id ?? 0,
+                          "is_transfer": widget.is_transfer,
+                          "from_sub_envelope_id": widget.from_sub_envelope_id ?? 0
+                        };
+
+                        TransactionRepo().saveNewTransaction(transactionMap);
                       },
                     )
                   ),

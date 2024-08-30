@@ -34,6 +34,13 @@ class _CreateTransactionScreen extends State<CreateTransactionScreen> {
   List<bool> expandedList = List.filled(1, false);
   List<bool> tapSubEnvelope = List.filled(2, false);
 
+  int? _envelopeId;
+  int? _subEnvelopeId;
+  String? _category;
+
+  TextEditingController _amountController = TextEditingController();
+  TextEditingController _notesController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +50,8 @@ class _CreateTransactionScreen extends State<CreateTransactionScreen> {
     var formatter = DateFormat('yyyy/MM/dd');
     var topupDate = formatter.format(DateTime.now());
     String dropdownValue = accountsList.first;
+    String _transactionType = transactionTypeList.first;
+
 
 
     return MaterialApp(
@@ -79,6 +88,7 @@ class _CreateTransactionScreen extends State<CreateTransactionScreen> {
                     ),
                     hintText: "0.0"
                   ),
+                  controller: _amountController,
                 ),              
               ),
 
@@ -100,6 +110,7 @@ class _CreateTransactionScreen extends State<CreateTransactionScreen> {
                   onToggle: (index) {
                     setState(() {
                       switch_index = index!;
+                      _transactionType = transactionTypeList.elementAt(index);
                     });
                   }
                 ),
@@ -125,6 +136,7 @@ class _CreateTransactionScreen extends State<CreateTransactionScreen> {
                           GestureDetector(
                             onTap: (){
                               setState(() {
+                                _envelopeId = envelopeList.data!.elementAt(index).envelope_id;
                                 expandedList[index] = !expandedList.elementAt(index);
                                 tapSubEnvelope = List.filled(2, false);
                               });
@@ -170,18 +182,20 @@ class _CreateTransactionScreen extends State<CreateTransactionScreen> {
                                                       setState((){
                                                         if(tapSubEnvelope.elementAt(sub_index)) {
                                                           tapSubEnvelope[sub_index] = false;
+                                                          _subEnvelopeId = -1;
                                                         } else {
                                                           if(tapSubEnvelope.contains(true)) {
                                                             int selected = tapSubEnvelope.indexOf(true);
                                                             tapSubEnvelope[selected] = false;
                                                           }
                                                           tapSubEnvelope[sub_index] = true;
+                                                          _subEnvelopeId = subEnvelopeList.data!.elementAt(sub_index).sub_envelope_id;
                                                         }                                                      
                                                       });
                                                     },
                                                     child: Container(
                                                       height: MediaQuery.of(context).size.height/30,
-                                                      child: Text("Sample"),
+                                                      child: Text(subEnvelopeList.data!.elementAt(sub_index).sub_envelope_name),
                                                       decoration: BoxDecoration(
                                                         borderRadius: BorderRadius.all(Radius.circular(6)),
                                                         border: Border.all(
@@ -345,6 +359,7 @@ class _CreateTransactionScreen extends State<CreateTransactionScreen> {
                   onChanged: (String? value) {
                     setState(() {
                       dropdownValue = value!;
+                      _category = dropdownValue;
                     });
                   },
                   items: accountsList.map((String value) {
@@ -377,14 +392,26 @@ class _CreateTransactionScreen extends State<CreateTransactionScreen> {
                     ),
                   ),
                   style: const TextStyle(color: ApplicationColors.Primary_900),
+                  controller: _notesController,
                 ), 
               ),
 
               Expanded(
                 flex: 10,
-                child: NavigationBar4Transaction()
+                child: NavigationBar4Transaction(
+                  envelope_id: _envelopeId ?? 0, 
+                  sub_envelope_id: _subEnvelopeId ?? 0, 
+                  transaction_date: DateTime.now().millisecondsSinceEpoch, 
+                  transaction_amount: double.tryParse(_amountController.text.replaceAll(",","")) ?? 0, 
+                  category: _category ?? "",
+                  notes: _notesController.text,
+                  transaction_type: _transactionType, 
+                  account_id: widget.user_id, 
+                  from_envelope_id: null,
+                  is_transfer: 0,
+                  from_sub_envelope_id: null,
+                  )
               )
-
             ],
           ),
         )
