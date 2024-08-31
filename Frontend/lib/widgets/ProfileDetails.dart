@@ -41,7 +41,7 @@ class _ProfileDetailsWidget extends State<ProfileDetailsWidget> {
 
     return Container(
       child: FutureBuilder(
-        future: ProfileDetailsRepo().getProfileDetails(),
+        future: ProfileDetailsRepo().getProfileDetails(1),
         builder: (BuildContext context, AsyncSnapshot<List<ProfileDetails>> profile_details) {
           
           String dropdownValue = profile_details.hasData ? profile_details.data!.first.currency : currencyList.first;

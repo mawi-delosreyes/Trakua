@@ -6,9 +6,9 @@ class ProfileDetailsRepo{
 
   ChibaoDao chibaoDao = ChibaoDao();
 
-  Future<List<ProfileDetails>> getProfileDetails() async {
+  Future<List<ProfileDetails>> getProfileDetails(int userId) async {
     Database db = await chibaoDao.dbHelper.getDatabase;
-    final details = await db.rawQuery("SELECT * FROM Profile_Details WHERE user_id = 1");
+    final details = await db.rawQuery("SELECT * FROM Profile_Details WHERE user_id = $userId");
     return details.map((element) => ProfileDetails.fromMap(element)).toList();
   }
 }
