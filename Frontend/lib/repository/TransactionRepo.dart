@@ -6,7 +6,7 @@ import 'package:sqflite/sqflite.dart';
 class TransactionRepo{
   ChibaoDao chibaoDao = ChibaoDao();
 
-  Future<List<Transactions>> getEnvelopes() async {
+  Future<List<Transactions>> getTransactions() async {
     Database db = await chibaoDao.dbHelper.getDatabase;
     final transactionList = await db.rawQuery("SELECT * FROM Transactions");
     return transactionList.map((element) => Transactions.fromMap(element)).toList();

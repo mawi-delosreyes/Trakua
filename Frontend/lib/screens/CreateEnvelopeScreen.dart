@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/model/ScheduledTransaction.dart';
 import 'package:frontend/model/SubEnvelope.dart';
+import 'package:frontend/repository/ScheduleTransactionRepo.dart';
 import 'package:frontend/repository/SubEnvelopeRepo.dart';
 import 'package:frontend/style/ApplicationColors.dart';
 import 'package:frontend/widgets/CreateSubEnvelopePopup.dart';
@@ -210,13 +212,53 @@ class _CreateEnvelopeScreen extends State<CreateEnvelopeScreen> {
                       Container(height:  MediaQuery.of(context).size.height/40,),
 
                       Container(
-                        padding: EdgeInsets.only(left: MediaQuery.of(context).size.height/30),
+                        padding: EdgeInsets.only(left: MediaQuery.of(context).size.height/30, right: MediaQuery.of(context).size.height/30),
                         child: Column(
                           children: <Widget>[
                             Container(
                               alignment: Alignment.centerLeft,
-                              child: const Text("Transactions"),  
+                              child: const Text("Scheduled Transactions"),  
                             ),
+                            FutureBuilder(
+                              future: ScheduledTransactionRepo().getScheduledTransactions(), 
+                              builder: (BuildContext context, AsyncSnapshot<List<ScheduledTransactions>> scheduledTransactionsList) {
+                                if(scheduledTransactionsList.hasData) {
+                                  return Container(
+                                    height: MediaQuery.of(context).size.height/4,
+                                    child: ListView.separated(
+                                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/50),
+                                      itemCount: scheduledTransactionsList.data!.length,
+                                      itemBuilder: (BuildContext context, int index){
+
+                                        return Container(
+                                          padding: EdgeInsets.symmetric(horizontal: 10),
+                                          height: MediaQuery.of(context).size.height/20,
+
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(const Radius.circular(8)),
+                                            border: Border.all(
+                                              color: ApplicationColors.Primary_1000
+                                            ),
+                                            color: ApplicationColors.Primary_100
+                                          ),
+                                          child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: <Widget>[
+                                              Text(scheduledTransactionsList.data!.elementAt(index).sub_envelope_name),
+                                              SizedBox(width: MediaQuery.of(context).size.width/30),
+                                              Text(scheduledTransactionsList.data!.elementAt(index).transaction_amount.toString())
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                      separatorBuilder: (BuildContext context, int index) => SizedBox(height: MediaQuery.of(context).size.height/50,)),
+                                  );
+                                } else {
+                                  return Container();
+                                }
+                              }
+                            )
                           ],
                         ),
                       )
