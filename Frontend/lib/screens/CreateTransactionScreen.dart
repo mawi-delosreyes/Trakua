@@ -40,6 +40,24 @@ class _CreateTransactionScreen extends State<CreateTransactionScreen> {
 
   TextEditingController _amountController = TextEditingController();
   TextEditingController _notesController = TextEditingController();
+  final _scheduleTransactionController = TextEditingController();
+
+
+  DateTime selectedDate = DateTime.now();
+
+  _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
+  }
+
 
 
   @override
@@ -47,12 +65,8 @@ class _CreateTransactionScreen extends State<CreateTransactionScreen> {
 
     List<String> transactionTypeList = ["Savings", "Expenses", "Transfer"];
     List<String> accountsList = ["Wants", "Needs", "Savings"];
-    var formatter = DateFormat('yyyy/MM/dd');
-    var topupDate = formatter.format(DateTime.now());
     String dropdownValue = accountsList.first;
     String _transactionType = transactionTypeList.first;
-
-
 
     return MaterialApp(
       title: "Chibao",
@@ -246,14 +260,15 @@ class _CreateTransactionScreen extends State<CreateTransactionScreen> {
               Container(
                 height: MediaQuery.of(context).size.height/12,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
                       height: MediaQuery.of(context).size.height/20,
-                      width: MediaQuery.of(context).size.width/3.3, 
+                      width: MediaQuery.of(context).size.width/2.5, 
                       padding: EdgeInsets.only(top: 10),
                       child: TextFormField(
-                        key: Key(topupDate.toString()),
-                        initialValue: topupDate.toString(),
+                        key: Key(selectedDate.toString().split(' ').first),
+                        initialValue: selectedDate.toString().split(' ').first,
                         decoration: InputDecoration(
                           fillColor: ApplicationColors.Base_White,
                           filled: true,
@@ -264,18 +279,7 @@ class _CreateTransactionScreen extends State<CreateTransactionScreen> {
                           ),
                           suffixIcon: IconButton(
                             icon: SvgPicture.asset('assets/icons/calendar.svg'),
-                            onPressed: () => showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime(2015, 8),
-                              lastDate: DateTime(2101),
-                              ).then((value) => {
-                                if (value != null) {
-                                  setState(() {
-                                      topupDate = '${value.year.toString()}/${value.month.toString()}/${value.day.toString()}';
-                                    })
-                                }
-                              }),
+                            onPressed: () => _selectDate(CreateTransactionScreen.navKey.currentState!.overlay!.context),
                           ),                            
                           floatingLabelBehavior: FloatingLabelBehavior.always,
                           labelText: "Date",
@@ -401,7 +405,7 @@ class _CreateTransactionScreen extends State<CreateTransactionScreen> {
                 child: NavigationBar4Transaction(
                   envelope_id: _envelopeId ?? 0, 
                   sub_envelope_id: _subEnvelopeId ?? 0, 
-                  transaction_date: DateTime.now().millisecondsSinceEpoch, 
+                  transaction_date: selectedDate.millisecondsSinceEpoch, 
                   transaction_amount: double.tryParse(_amountController.text.replaceAll(",","")) ?? 0, 
                   category: _category ?? "",
                   notes: _notesController.text,
