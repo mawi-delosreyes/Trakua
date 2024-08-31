@@ -9,6 +9,7 @@ class TransactionsTable {
           sub_envelope_id INTEGER,
           transaction_date INTEGER, 
           transaction_amount REAL,
+          category TEXT,
           notes TEXT,
           transaction_type TEXT,
           account_id INTEGER,
