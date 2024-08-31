@@ -47,8 +47,8 @@ class Envelope {
       envelope_id: map["envelope_id"] as int, 
       envelope_name: map["envelope_name"] as String, 
       user_id: map["user_id"] as int, 
-      envelope_total_balance: map["account_balance"] as double,
-      envelope_balance: map["account_total_balance"] as double,
+      envelope_total_balance: map["envelope_total_balance"] as double,
+      envelope_balance: map["envelope_balance"] as double,
       envelope_type: map["envelope_type"] as String,
       last_sync: map["last_sync"] as int
     );
