@@ -1,8 +1,8 @@
 class Fields {
-  static const String transaction_id = "transaction_id";
+  static const String scheduled_transaction_id = "scheduled_transaction_id";
   static const String envelope_id = "envelope_id";
   static const String sub_envelope_id = "sub_envelope_id";
-  static const String transaction_date = "transaction_date";
+  static const String scheduled_date = "scheduled_date";
   static const String transaction_amount = "transaction_amount";
   //static const String category = "cateogry";
   static const String notes = "notes";
@@ -11,16 +11,17 @@ class Fields {
   static const String from_envelope_id = "from_envelope_id";
   static const String is_transfer = "is_transfer";
   static const String from_sub_envelope_id = "from_sub_envelope_id";
+  static const String last_sync = "last_sync";
 
 
-  static const List<String> values = [transaction_id, envelope_id, sub_envelope_id, transaction_date, transaction_amount, notes, transaction_type, account_id, from_envelope_id, is_transfer, from_sub_envelope_id];
+  static const List<String> values = [scheduled_transaction_id, envelope_id, sub_envelope_id, scheduled_date, transaction_amount, notes, transaction_type, account_id, from_envelope_id, is_transfer, from_sub_envelope_id, last_sync];
 }
 
-class Transactions {
-  final int transaction_id;
+class ScheduledTransactions {
+  final int scheduled_transaction_id;
   final int envelope_id;
   final int sub_envelope_id;
-  final int transaction_date;
+  final int scheduled_date;
   final double transaction_amount;
   //final String category;
   final String notes;
@@ -29,12 +30,13 @@ class Transactions {
   var from_envelope_id;
   final int is_transfer;
   var from_sub_envelope_id;
+  final int last_sync;
 
-  Transactions({
-    required this.transaction_id,
+  ScheduledTransactions({
+    required this.scheduled_transaction_id,
     required this.envelope_id,
     required this.sub_envelope_id,
-    required this.transaction_date,
+    required this.scheduled_date,
     required this.transaction_amount,
     //required this.category,
     required this.notes,
@@ -42,15 +44,16 @@ class Transactions {
     required this.account_id,
     this.from_envelope_id = null,
     required this.is_transfer,
-    this.from_sub_envelope_id = null
+    this.from_sub_envelope_id = null,
+    required this.last_sync
   });
 
   Map<String, dynamic> toMap(){
     return {
-      Fields.transaction_id: transaction_id,
+      Fields.scheduled_transaction_id: scheduled_transaction_id,
       Fields.envelope_id: envelope_id,
       Fields.sub_envelope_id: sub_envelope_id,
-      Fields.transaction_date: transaction_date,
+      Fields.scheduled_date: scheduled_date,
       Fields.transaction_amount: transaction_amount,
       //Fields.category: category,
       Fields.notes: notes,
@@ -58,16 +61,17 @@ class Transactions {
       Fields.account_id: account_id,
       Fields.from_envelope_id: from_envelope_id,
       Fields.is_transfer: is_transfer,
-      Fields.from_sub_envelope_id: from_sub_envelope_id
+      Fields.from_sub_envelope_id: from_sub_envelope_id,
+      Fields.last_sync: last_sync
     };
   }
 
-  factory Transactions.fromMap(Map<String, dynamic> map) {
-    return Transactions(
-      transaction_id: map["transaction_id"] as int,
+  factory ScheduledTransactions.fromMap(Map<String, dynamic> map) {
+    return ScheduledTransactions(
+      scheduled_transaction_id: map["scheduled_transaction_id"] as int,
       envelope_id: map["envelope_id"] as int,
       sub_envelope_id: map["sub_envelope_id"] as int,
-      transaction_date: map["transaction_date"] as int,
+      scheduled_date: map["scheduled_date"] as int,
       transaction_amount: map["transaction_amount"] as double,
       //category: map["cateogry"] as String,
       notes: map["notes"] as String,
@@ -75,7 +79,8 @@ class Transactions {
       account_id: map["account_id"] as int,
       from_envelope_id: map["from_envelope_id"],
       is_transfer: map["is_transfer"] as int,
-      from_sub_envelope_id: map["from_sub_envelope_id"]
+      from_sub_envelope_id: map["from_sub_envelope_id"],
+      last_sync: map["last_sync"] as int
     );
   }
 }

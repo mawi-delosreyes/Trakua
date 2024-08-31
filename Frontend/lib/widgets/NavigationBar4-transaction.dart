@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/repository/ScheduleTransactionRepo.dart';
 import 'package:frontend/repository/TransactionRepo.dart';
 import 'package:frontend/style/ApplicationColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -133,21 +134,40 @@ class _NavigationBar4TransactionState extends State<NavigationBar4Transaction> {
                         ),
                       ),
                       onTap: (){
-                        Map<String, Object> transactionMap = {
-                          "envelope_id": widget.envelope_id,
-                          "sub_envelope_id": widget.sub_envelope_id,
-                          "transaction_date": widget.transaction_date,
-                          "transaction_amount": widget.transaction_amount,
-                          "category": widget.category,
-                          "notes": widget.notes,
-                          "transaction_type": widget.transaction_type,
-                          "account_id": widget.transaction_type,
-                          "from_envelope_id": widget.from_envelope_id ?? 0,
-                          "is_transfer": widget.is_transfer,
-                          "from_sub_envelope_id": widget.from_sub_envelope_id ?? 0
-                        };
+                        DateTime now = new DateTime.now();
 
-                        TransactionRepo().saveNewTransaction(transactionMap);
+                        if(widget.transaction_date == DateTime(now.year, now.month, now.day).millisecondsSinceEpoch) {
+                          Map<String, Object> transactionMap = {
+                            "envelope_id": widget.envelope_id,
+                            "sub_envelope_id": widget.sub_envelope_id,
+                            "transaction_date": widget.transaction_date,
+                            "transaction_amount": widget.transaction_amount,
+                            //"category": widget.category,
+                            "notes": widget.notes,
+                            "transaction_type": widget.transaction_type,
+                            "account_id": widget.transaction_type,
+                            "from_envelope_id": widget.from_envelope_id ?? 0,
+                            "is_transfer": widget.is_transfer,
+                            "from_sub_envelope_id": widget.from_sub_envelope_id ?? 0
+                          };
+                          TransactionRepo().saveNewTransaction(transactionMap);
+                        } else {
+                          Map<String, Object> scheduledTransactionMap = {
+                            "envelope_id": widget.envelope_id,
+                            "sub_envelope_id": widget.sub_envelope_id,
+                            "scheduled_date": widget.transaction_date,
+                            "transaction_amount": widget.transaction_amount,
+                            //"category": widget.category,
+                            "notes": widget.notes,
+                            "transaction_type": widget.transaction_type,
+                            "account_id": widget.transaction_type,
+                            "from_envelope_id": widget.from_envelope_id ?? 0,
+                            "is_transfer": widget.is_transfer,
+                            "from_sub_envelope_id": widget.from_sub_envelope_id ?? 0,
+                            "last_sync": DateTime.now().millisecondsSinceEpoch
+                          };
+                        ScheduledTransactionRepo().saveNewTransaction(scheduledTransactionMap);
+                        }
                       },
                     )
                   ),

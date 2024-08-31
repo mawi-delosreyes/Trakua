@@ -24,7 +24,7 @@ class TransactionRepo{
     Database db = await chibaoDao.dbHelper.getDatabase;
 
     return await db.update(
-      "Envelopes", 
+      "Transactions", 
       transactionMap,
       where: 'transaction_id=?',
       whereArgs: [transactionId]
