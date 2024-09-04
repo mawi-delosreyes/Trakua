@@ -35,19 +35,19 @@ class Transactions {
   var from_sub_envelope_id;
 
   Transactions({
-    required this.transaction_id,
-    required this.envelope_id,
+    this.transaction_id = 0,
+    this.envelope_id = 0,
     this.envelope_name = "",
-    required this.sub_envelope_id,
+    this.sub_envelope_id = 0,
     this.sub_envelope_name = "",
-    required this.transaction_date,
-    required this.transaction_amount,
+    this.transaction_date = 0,
+    this.transaction_amount = 0,
     //required this.category,
-    required this.notes,
-    required this.transaction_type,
-    required this.account_id,
+    this.notes = "",
+    this.transaction_type = "",
+    this.account_id = "",
     this.from_envelope_id = null,
-    required this.is_transfer,
+    this.is_transfer = 1,
     this.from_sub_envelope_id = null
   });
 
@@ -87,6 +87,13 @@ class Transactions {
       is_transfer: map["is_transfer"] as int,
       from_sub_envelope_id: map["from_sub_envelope_id"]
     );
+  }
+
+  factory Transactions.sortedTransactionMap(Map<String, dynamic> map) {
+    return Transactions(
+      sub_envelope_name: map["sub_envelope_name"] as String,
+      transaction_amount: map["transaction_amount"] as double
+    );  
   }
 }
 

@@ -36,4 +36,14 @@ class TransactionRepo{
       whereArgs: [transactionId]
       );
   }
+
+  Future<List<Transactions>> getSortedSubEnvelopeTransactionAmount() async {
+    Database db = await chibaoDao.dbHelper.getDatabase;
+    final sortedTransactionList = await db.rawQuery(
+      '''SELECT se.sub_envelope_name, SUM(t.transaction_amount) as transaction_amount FROM Transactions t 
+      INNER JOIN Sub_Envelopes se ON t.sub_envelope_id=se.sub_envelope_id 
+      GROUP BY t.sub_envelope_id ORDER BY SUM(t.transaction_amount) DESC LIMIT 3'''
+    );
+    return sortedTransactionList.map((element) => Transactions.sortedTransactionMap(element)).toList(); 
+  }
 }

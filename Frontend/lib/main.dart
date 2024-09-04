@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/AllEnvelopeScreen.dart';
 import 'package:frontend/screens/CreateEnvelopeScreen.dart';
 import 'package:frontend/screens/CreateTransactionScreen.dart';
 import 'package:frontend/widgets/CreateSubEnvelopePopup.dart';
@@ -17,7 +18,8 @@ void main() async {
   runApp(
     //CreateEnvelopeScreen(user_id: user_id)
     //CreateTransactionScreen(user_id: user_id)
-    LandingScreen(user_id: user_id)
+    //LandingScreen(user_id: user_id)
+    AllEnvelopeScreen(user_id: user_id)
   );
 }
 
