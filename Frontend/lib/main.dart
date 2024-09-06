@@ -4,6 +4,7 @@ import 'package:frontend/screens/AllSubEnvelopeScreen.dart';
 import 'package:frontend/screens/CreateEnvelopeScreen.dart';
 import 'package:frontend/screens/CreateTransactionScreen.dart';
 import 'package:frontend/screens/TransactionScreen.dart';
+import 'package:frontend/screens/TransferTransactionScreen.dart';
 import 'package:frontend/widgets/CreateSubEnvelopePopup.dart';
 import 'package:frontend/screens/LandingScreen.dart';
 import 'screens/TemplateScreen.dart';
@@ -23,7 +24,7 @@ void main() async {
     //LandingScreen(user_id: user_id)
     //AllEnvelopeScreen(user_id: user_id)
     //AllSubEnvelopeScreen(user_id: user_id)
-    TransactionScreen()
+    TransferTransactionScreen()
   );
 }
 
