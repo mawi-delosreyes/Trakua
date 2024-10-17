@@ -9,7 +9,7 @@ class EnvelopesTable {
           user_id INTEGER,
           envelope_total_balance REAL, 
           envelope_balance REAL,
-          envelope_type INTEGER,
+          envelope_type TEXT,
           number_of_sub_envelope INTEGER,
           last_sync INTEGER
       );
