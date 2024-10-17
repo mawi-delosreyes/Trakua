@@ -1,0 +1,1 @@
+SELECT * FROM Wallet_Accounts WHERE wallet_id=1
