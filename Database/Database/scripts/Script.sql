@@ -1,1 +1,0 @@
-SELECT * FROM Profile_Details WHERE user_id = 1
