@@ -23,7 +23,7 @@ class TemplateScreen extends StatelessWidget {
               new Expanded(
                 flex: 20,
                 child: Container(
-                  child: new NavigationBar2(),
+                  child: new NavigationBar2(screen_selection: "sample", user_id: 1,),
                 )
               )
             ] 

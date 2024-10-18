@@ -9,8 +9,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 
 class TransactionScreen extends StatefulWidget {
+  final int user_id;
+
   TransactionScreen({
     Key? key,
+    required this.user_id
   });
 
   @override
@@ -197,7 +200,7 @@ class _TransactionScreen extends State<TransactionScreen> {
 
               Expanded(
                 flex: 15,
-                child: NavigationBar2()
+                child: NavigationBar2(screen_selection: "transaction", user_id: widget.user_id)
               )
 
             ],

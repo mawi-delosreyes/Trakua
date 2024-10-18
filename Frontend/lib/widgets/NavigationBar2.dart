@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/AllEnvelopeScreen.dart';
+import 'package:frontend/screens/TransactionScreen.dart';
 import 'package:frontend/style/ApplicationColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:frontend/screens/LandingScreen.dart';
 
 class NavigationBar2 extends StatefulWidget {
-  const NavigationBar2({super.key});
+
+  var screen_selection;
+  int user_id;
+  NavigationBar2({Key? key, required this.screen_selection, required this.user_id}) : super(key:key);
+
 
   @override
   State<NavigationBar2> createState() => _NavigationBar2State();
@@ -30,10 +37,22 @@ class _NavigationBar2State extends State<NavigationBar2> {
                       child: FractionallySizedBox(
                         widthFactor: 0.6,
                         heightFactor: 0.4,
-                        child: SvgPicture.asset(
-                          'assets/icons/home.svg',
-                          color: ApplicationColors.Primary_900
-                          )
+                        child: InkWell(
+                          child: SvgPicture.asset(
+                            widget.screen_selection == "home" ? 'assets/icons/home-fill.svg' : 'assets/icons/home.svg', 
+                            color: ApplicationColors.Primary_900,
+                          ),
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context, 
+                              PageRouteBuilder(
+                                pageBuilder: (context, animation1, animation2) => LandingScreen(user_id: widget.user_id,),
+                                transitionDuration: Duration.zero,
+                                reverseTransitionDuration: Duration.zero
+                              )
+                            );
+                          } ,
+                        ),
                       ),
                     ),
 
@@ -41,10 +60,22 @@ class _NavigationBar2State extends State<NavigationBar2> {
                       child: FractionallySizedBox(
                         widthFactor: 0.6,
                         heightFactor: 0.4,
-                        child: SvgPicture.asset(
-                          'assets/icons/envelopes.svg',
-                          color: ApplicationColors.Primary_900
-                          )
+                        child: InkWell(
+                          child: SvgPicture.asset(
+                            widget.screen_selection == "envelope" ? 'assets/icons/envelopes-fill.svg' : 'assets/icons/envelopes.svg', 
+                            color: ApplicationColors.Primary_900
+                          ),
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context, 
+                              PageRouteBuilder(
+                                pageBuilder: (context, animation1, animation2) => AllEnvelopeScreen(user_id: widget.user_id,),
+                                transitionDuration: Duration.zero,
+                                reverseTransitionDuration: Duration.zero
+                              )
+                            );
+                          }
+                        )
                       ),
                     ),
 
@@ -52,10 +83,22 @@ class _NavigationBar2State extends State<NavigationBar2> {
                       child: FractionallySizedBox(
                         widthFactor: 0.6,
                         heightFactor: 0.4,
-                        child: SvgPicture.asset(
-                          'assets/icons/history.svg',
-                          color: ApplicationColors.Primary_900
-                          )
+                        child: InkWell(
+                          child: SvgPicture.asset(
+                            widget.screen_selection == "transaction" ? 'assets/icons/history-fill.svg' : 'assets/icons/history.svg', 
+                            color: ApplicationColors.Primary_900
+                          ),
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context, 
+                              PageRouteBuilder(
+                                pageBuilder: (context, animation1, animation2) => TransactionScreen(user_id: widget.user_id,),
+                                transitionDuration: Duration.zero,
+                                reverseTransitionDuration: Duration.zero
+                              )
+                            );
+                          } ,
+                        )
                       ),
                     ),
 

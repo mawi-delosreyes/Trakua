@@ -82,7 +82,7 @@ class _AllEnvelopeScreen extends State<AllEnvelopeScreen> {
 
               Expanded(
                 flex: 15,
-                child: NavigationBar2()
+                child: NavigationBar2(screen_selection: "envelope", user_id: widget.user_id)
               )
 
             ],

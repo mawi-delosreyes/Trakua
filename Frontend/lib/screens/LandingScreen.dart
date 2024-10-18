@@ -203,7 +203,7 @@ class _LandingScreen extends State<LandingScreen> {
               ),
               Expanded(
                 flex: 15,
-                child: NavigationBar2()
+                child: NavigationBar2(screen_selection: "home", user_id: widget.user_id,)
               )
 
             ],
