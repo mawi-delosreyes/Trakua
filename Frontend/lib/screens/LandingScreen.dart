@@ -7,13 +7,12 @@ import 'package:frontend/repository/EnvelopeRepo.dart';
 import 'package:frontend/repository/ProfileDetailsRepo.dart';
 import 'package:frontend/repository/SubEnvelopeRepo.dart';
 import 'package:frontend/repository/TransactionRepo.dart';
-import 'package:frontend/screens/AllSubEnvelopeScreen.dart';
 import 'package:frontend/screens/ProfileScreen.dart';
-import 'package:frontend/screens/TransactionScreen.dart';
 import 'package:frontend/style/ApplicationColors.dart';
 import 'package:frontend/widgets/NavigationBar2.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LandingScreen extends StatefulWidget {
   final int user_id;
@@ -121,10 +120,10 @@ class _LandingScreen extends State<LandingScreen> {
                                   center: Center(
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
                                           "${(amount_left * 100)}%",
-                                          textAlign: TextAlign.center,
                                           style: GoogleFonts.figtree(
                                             fontWeight: FontWeight.bold,
                                             color: ApplicationColors.Primary_1000,
@@ -133,8 +132,7 @@ class _LandingScreen extends State<LandingScreen> {
                                         ),
                                         Text(
                                           "${envelopeList.data!.first.envelope_balance} out of ${envelopeList.data!.first.envelope_total_balance}",
-                                          textAlign: TextAlign.center,
-                                          style: GoogleFonts.helvetica(
+                                          style: GoogleFonts.roboto(
                                             fontWeight: FontWeight.normal,
                                             color: ApplicationColors.Primary,
                                             fontSize: 11
@@ -155,7 +153,7 @@ class _LandingScreen extends State<LandingScreen> {
                                     fontWeight: FontWeight.bold
                                   ),
                                 ),
-                                SizedBox(height: MediaQuery.of(context).size.height/60,),
+                                SizedBox(height: MediaQuery.of(context).size.height/55,),
                               ],
                             );
                           } else{
@@ -170,7 +168,7 @@ class _LandingScreen extends State<LandingScreen> {
                         children: <Widget>[
                           Container(
                             margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/20),
-                            child:  const Row(
+                            child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
@@ -264,7 +262,7 @@ class _LandingScreen extends State<LandingScreen> {
                       margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/20),
                       child: Column(
                         children: <Widget>[
-                          const Row(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
