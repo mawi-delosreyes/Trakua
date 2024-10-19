@@ -5,11 +5,10 @@ import 'package:frontend/repository/ScheduleTransactionRepo.dart';
 import 'package:frontend/repository/SubEnvelopeRepo.dart';
 import 'package:frontend/style/ApplicationColors.dart';
 import 'package:frontend/widgets/CreateSubEnvelopePopup.dart';
-import 'package:frontend/widgets/NavigationBar1.dart';
-import 'package:frontend/widgets/NavigationBar2.dart';
 import 'package:frontend/widgets/NavigationBar4.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CreateEnvelopeScreen extends StatefulWidget {
   final int user_id;
@@ -52,9 +51,14 @@ class _CreateEnvelopeScreen extends State<CreateEnvelopeScreen> {
                     
                     Container(height: MediaQuery.of(context).size.height/10,),
 
-                    const Text(
+                    Text(
                       "Create Envelope",
-                      textDirection: TextDirection.ltr
+                      textDirection: TextDirection.ltr,
+                      style: GoogleFonts.figtree(
+                        color: ApplicationColors.Primary_1000,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20
+                      ),
                     ),
 
                     Container(height: MediaQuery.of(context).size.height/30,),
@@ -63,14 +67,22 @@ class _CreateEnvelopeScreen extends State<CreateEnvelopeScreen> {
                       width: MediaQuery.of(context).size.width/1.5,
                       child: TextFormField(
                         textAlign: TextAlign.center,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           contentPadding: EdgeInsets.all(0.0),
                           isDense: true,
                           border: UnderlineInputBorder(),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: ApplicationColors.Secondary_300)
+                            borderSide: BorderSide(color: ApplicationColors.Secondary)
                           ),
-                          hintText: "Envelope Name"
+                          hintText: "Envelope Name",
+                          hintStyle: GoogleFonts.figtree(
+                            color: ApplicationColors.Secondary,
+                            fontSize: 24
+                          )
+                        ),
+                        style: GoogleFonts.figtree(
+                          color: ApplicationColors.Secondary,
+                          fontSize: 24
                         ),
                         controller: _envelopeNameController,
                       ),
@@ -79,8 +91,8 @@ class _CreateEnvelopeScreen extends State<CreateEnvelopeScreen> {
                     Container(height: MediaQuery.of(context).size.height/30,),
 
                     ToggleSwitch(
-                      minHeight: MediaQuery.of(context).size.height/30,
-                      minWidth: MediaQuery.of(context).size.width/3,
+                      minHeight: MediaQuery.of(context).size.height/35,
+                      minWidth: MediaQuery.of(context).size.width/3.5,
                       initialLabelIndex: _swapType? 0 : 1,
                       totalSwitches: 2,
                         labels: envelopeTypeList,
@@ -89,6 +101,13 @@ class _CreateEnvelopeScreen extends State<CreateEnvelopeScreen> {
                         activeFgColor: ApplicationColors.Primary_1000,
                         inactiveFgColor: ApplicationColors.Primary_1000,
                         borderColor: [ApplicationColors.Neutrals_200],
+                        customTextStyles: [
+                          GoogleFonts.figtree(
+                            color: ApplicationColors.Primary_1000,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 10,
+                          )
+                        ],
                         borderWidth: 1.0,
                         onToggle: (index) {
                           setState(() {
@@ -98,7 +117,7 @@ class _CreateEnvelopeScreen extends State<CreateEnvelopeScreen> {
                         }
                       ),
 
-                      Container(height:  MediaQuery.of(context).size.height/15,),
+                      Container(height:  MediaQuery.of(context).size.height/25,),
 
                       Container(
                         padding: EdgeInsets.only(left: MediaQuery.of(context).size.height/30),
@@ -107,7 +126,14 @@ class _CreateEnvelopeScreen extends State<CreateEnvelopeScreen> {
                           children: <Widget>[
                             Container(
                               alignment: Alignment.centerLeft,
-                              child: const Text("Sub-Envelopes"),
+                              child: Text(
+                                "Sub-Envelopes",
+                                style: GoogleFonts.figtree(
+                                  fontWeight: FontWeight.w700,
+                                  color: ApplicationColors.Primary_1000,
+                                  fontSize: 15
+                                ),
+                              ),
                             ),
 
                             Container(height: MediaQuery.of(context).size.height/60,),
@@ -217,7 +243,14 @@ class _CreateEnvelopeScreen extends State<CreateEnvelopeScreen> {
                           children: <Widget>[
                             Container(
                               alignment: Alignment.centerLeft,
-                              child: const Text("Scheduled Transactions"),  
+                              child: Text(
+                                "Scheduled Transactions",
+                                style: GoogleFonts.figtree(
+                                  fontWeight: FontWeight.w700,
+                                  color: ApplicationColors.Primary_1000,
+                                  fontSize: 15
+                                ),
+                              ),  
                             ),
                             FutureBuilder(
                               future: ScheduledTransactionRepo().getScheduledTransactions(), 
