@@ -90,7 +90,12 @@ class _LandingScreen extends State<LandingScreen> {
                                 width: MediaQuery.of(context).size.width/50,
                               ),
                               Text(
-                                profileDetail.hasData ? "Hello, " + profileDetail.data!.first.first_name + "!" : "Username"
+                                profileDetail.hasData ? "Hello, " + profileDetail.data!.first.first_name + "!" : "Username",
+                                style: GoogleFonts.figtree(
+                                  fontWeight: FontWeight.bold,
+                                  color: ApplicationColors.Primary_1000,
+                                  fontSize: 13
+                                ), 
                               ),
                             ],
                           );
@@ -105,7 +110,6 @@ class _LandingScreen extends State<LandingScreen> {
                         builder: (BuildContext context, AsyncSnapshot<List<Envelope>> envelopeList){
                           if(envelopeList.hasData){
                             double amount_left = (envelopeList.data!.first.envelope_total_balance - envelopeList.data!.first.envelope_balance) / envelopeList.data!.first.envelope_total_balance;
-
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -121,16 +125,19 @@ class _LandingScreen extends State<LandingScreen> {
                                         Text(
                                           "${(amount_left * 100)}%",
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
+                                          style: GoogleFonts.figtree(
+                                            fontWeight: FontWeight.bold,
                                             color: ApplicationColors.Primary_1000,
-                                            fontWeight: FontWeight.bold
+                                            fontSize: 23
                                           ),
                                         ),
                                         Text(
                                           "${envelopeList.data!.first.envelope_balance} out of ${envelopeList.data!.first.envelope_total_balance}",
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            color: ApplicationColors.Primary
+                                          style: GoogleFonts.helvetica(
+                                            fontWeight: FontWeight.normal,
+                                            color: ApplicationColors.Primary,
+                                            fontSize: 11
                                           ),
                                         )
                                       ],
@@ -169,10 +176,10 @@ class _LandingScreen extends State<LandingScreen> {
                               children: <Widget>[
                                 Text(
                                   "Sub-Envelope Analytics",
-                                  style: TextStyle(
-                                    color: ApplicationColors.Primary_1000,
+                                  style: GoogleFonts.figtree(
                                     fontWeight: FontWeight.w700,
-                                    fontSize: 17
+                                    color: ApplicationColors.Primary_1000,
+                                    fontSize: 15
                                   ),
                                 ),
                                 /*
@@ -262,11 +269,11 @@ class _LandingScreen extends State<LandingScreen> {
                             children: <Widget>[
                               Text(
                                 "Transactions",
-                                style: TextStyle(
-                                  color: ApplicationColors.Primary_1000,
+                                style: GoogleFonts.figtree(
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 17
-                                ),
+                                  color: ApplicationColors.Primary_1000,
+                                  fontSize: 15
+                                ),   
                               ),
                               /*
                               Container(
