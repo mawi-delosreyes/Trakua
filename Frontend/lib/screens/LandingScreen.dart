@@ -8,7 +8,6 @@ import 'package:frontend/repository/ProfileDetailsRepo.dart';
 import 'package:frontend/repository/SubEnvelopeRepo.dart';
 import 'package:frontend/repository/TransactionRepo.dart';
 import 'package:frontend/style/ApplicationColors.dart';
-import 'package:frontend/widgets/NavigationBar1.dart';
 import 'package:frontend/widgets/NavigationBar2.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -50,9 +49,23 @@ class _LandingScreen extends State<LandingScreen> {
                         future: ProfileDetailsRepo().getProfileDetails(widget.user_id),
                         builder: (BuildContext context, AsyncSnapshot<List<ProfileDetails>> profileDetail) {
                           if(profileDetail.hasData) {
-                            return Text("Hello, " + profileDetail.data!.first.first_name + "!");
+                            return Text(
+                              "Hello, " + profileDetail.data!.first.first_name + "!",
+                              style: GoogleFonts.figtree(
+                                fontWeight: FontWeight.bold,
+                                color: ApplicationColors.Primary_1000,
+                                fontSize: 13
+                              ),  
+                            );
                           } else {
-                            return Text("Username");
+                            return Text(
+                              "Username",
+                              style: GoogleFonts.figtree(
+                                fontWeight: FontWeight.bold,
+                                color: ApplicationColors.Primary_1000,
+                                fontSize: 13
+                              ), 
+                            );
                           }
                         },
                       )
@@ -75,10 +88,22 @@ class _LandingScreen extends State<LandingScreen> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    Text("${(amount_left * 100)}%"),
+                                    Text(
+                                      "${(amount_left * 100)}%",
+                                      style: GoogleFonts.figtree(
+                                        fontWeight: FontWeight.bold,
+                                        color: ApplicationColors.Primary_1000,
+                                        fontSize: 23
+                                      ),
+                                    ),
                                     Text(
                                       "${envelopeList.data!.first.envelope_balance} out of ${envelopeList.data!.first.envelope_total_balance}",
                                       textAlign: TextAlign.center,
+                                      style: GoogleFonts.helvetica(
+                                        fontWeight: FontWeight.normal,
+                                        color: ApplicationColors.Primary,
+                                        fontSize: 11
+                                      ), 
                                     )
                                   ],
                                 ),
@@ -100,7 +125,14 @@ class _LandingScreen extends State<LandingScreen> {
                           const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text("Sub-Envelope Analytics"),
+                              Text(
+                                "Sub-Envelope Analytics",
+                                style: GoogleFonts.figtree(
+                                  fontWeight: FontWeight.w700,
+                                  color: ApplicationColors.Primary_1000,
+                                  fontSize: 15
+                                ),
+                              ),
                               Text("Show All")
                             ],
                           ),
@@ -158,7 +190,14 @@ class _LandingScreen extends State<LandingScreen> {
                           const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text("Transactions"),
+                              Text(
+                                "Transactions",
+                                style: GoogleFonts.figtree(
+                                  fontWeight: FontWeight.w700,
+                                  color: ApplicationColors.Primary_1000,
+                                  fontSize: 15
+                                ),   
+                              ),
                               Text("Show All")
                             ],
                           ),
@@ -187,8 +226,6 @@ class _LandingScreen extends State<LandingScreen> {
                                     separatorBuilder: (BuildContext context, int index) => SizedBox(width: MediaQuery.of(context).size.height/35,)
                                   ),
                                 ); 
-                                  
-                                
                               } else {
                                 return Container();
                               }
