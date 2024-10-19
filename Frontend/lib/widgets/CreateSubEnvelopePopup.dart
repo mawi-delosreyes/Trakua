@@ -7,6 +7,7 @@ import 'package:frontend/style/ApplicationColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 import 'package:intl/intl.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 class CreateSubEnvelopePopupWidget extends StatefulWidget {
@@ -71,7 +72,14 @@ class _CreateSubEnvelopePopupWidget extends State<CreateSubEnvelopePopupWidget> 
               ),
             ),
 
-            Text("Create Sub-Envelope"),
+            Text(
+              "Create Sub-Envelope",
+              style: GoogleFonts.figtree(
+                fontWeight: FontWeight.bold,
+                color: ApplicationColors.Primary_900,
+                fontSize: 15
+              ),  
+            ),
 
             SizedBox(
               height: MediaQuery.of(context).size.height/30,
@@ -86,7 +94,7 @@ class _CreateSubEnvelopePopupWidget extends State<CreateSubEnvelopePopupWidget> 
                     height: MediaQuery.of(context).size.height/20,
                     width: MediaQuery.of(context).size.width/1.5,            
                     child: TextField(
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         fillColor: ApplicationColors.Base_White,
                         filled: true,
                         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -101,8 +109,10 @@ class _CreateSubEnvelopePopupWidget extends State<CreateSubEnvelopePopupWidget> 
                                 color: ApplicationColors.Secondary_900,
                           ),
                         ),
-                        labelStyle: TextStyle(
-                          color: ApplicationColors.Primary_900
+                        labelStyle: GoogleFonts.figtree(
+                          fontWeight: FontWeight.w600,
+                          color: ApplicationColors.Primary_900,
+                          fontSize: 15
                         ),
                       ),
                       controller: _subEnvelopeNameController,
@@ -114,7 +124,8 @@ class _CreateSubEnvelopePopupWidget extends State<CreateSubEnvelopePopupWidget> 
                     height: MediaQuery.of(context).size.height/20,
                     width: MediaQuery.of(context).size.width/1.5,            
                     child: TextFormField(
-                      decoration: const InputDecoration(
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
                         fillColor: Color.fromRGBO(250, 250, 250, 1),
                         filled: true,
                         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -129,8 +140,10 @@ class _CreateSubEnvelopePopupWidget extends State<CreateSubEnvelopePopupWidget> 
                                 color: ApplicationColors.Secondary_900,
                           ),
                         ),
-                        labelStyle: TextStyle(
-                          color: ApplicationColors.Primary_900
+                        labelStyle: GoogleFonts.figtree(
+                          fontWeight: FontWeight.w600,
+                          color: ApplicationColors.Primary_900,
+                          fontSize: 15
                         ),
                       ),
                       controller: _amountController,
@@ -160,8 +173,10 @@ class _CreateSubEnvelopePopupWidget extends State<CreateSubEnvelopePopupWidget> 
                             color: ApplicationColors.Secondary_900,
                           ),
                         ),
-                        labelStyle: const TextStyle(
+                        labelStyle: GoogleFonts.figtree(
+                          fontWeight: FontWeight.w600,
                           color: ApplicationColors.Primary_900,
+                          fontSize: 15
                         ),
                       ),
                       value: dropdownValue,
@@ -181,19 +196,26 @@ class _CreateSubEnvelopePopupWidget extends State<CreateSubEnvelopePopupWidget> 
                         Container(
                           alignment: Alignment.bottomLeft,
                           padding: EdgeInsets.only(left: MediaQuery.of(context).size.width/13),
-                          child: Text("Schedule Top Up"),
+                          child: Text(
+                            "Schedule Top Up",
+                            style: GoogleFonts.figtree(
+                                fontWeight: FontWeight.w600,
+                                color: ApplicationColors.Primary_900,
+                                fontSize: 13
+                            ),  
+                          ),
                         ),
                         
                         Container(
                           alignment: Alignment.bottomLeft,
-                          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width/13),
+                          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width/13, bottom: 0),
                           child: Row(  
                             children: <Widget>[
-                              
                               Container(
                                 height: MediaQuery.of(context).size.height/20,
                                 width: MediaQuery.of(context).size.width/3.3, 
                                 padding: EdgeInsets.only(top: 10),
+                                margin: EdgeInsets.only(bottom: 0),
                                 child: TextFormField(
                                   key: Key(topupDate.toString()),
                                   initialValue: topupDate.toString(),
@@ -232,8 +254,10 @@ class _CreateSubEnvelopePopupWidget extends State<CreateSubEnvelopePopupWidget> 
                                             color: ApplicationColors.Secondary_900,
                                       ),
                                     ),
-                                    labelStyle: const TextStyle(
-                                      color: ApplicationColors.Primary_900
+                                    labelStyle: GoogleFonts.roboto(
+                                      fontWeight: FontWeight.bold,
+                                      color: ApplicationColors.Primary_900,
+                                      fontSize: 13
                                     ),
                                   ),
                                   style: TextStyle(
@@ -246,9 +270,11 @@ class _CreateSubEnvelopePopupWidget extends State<CreateSubEnvelopePopupWidget> 
                               Container (
                                 height: MediaQuery.of(context).size.height/20,
                                 width: MediaQuery.of(context).size.width/2.9,    
-                                padding: EdgeInsets.only(top: 10, left: 10),
+                                padding: EdgeInsets.only(top: 10, left: 10, bottom: 0),
+                                margin: EdgeInsets.only(bottom: 0),
         
                                 child: TextFormField(
+                                  keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                     fillColor: ApplicationColors.Base_White,
                                     filled: true,
@@ -264,8 +290,10 @@ class _CreateSubEnvelopePopupWidget extends State<CreateSubEnvelopePopupWidget> 
                                         color: ApplicationColors.Secondary_900,
                                       ),
                                     ),
-                                    labelStyle: const TextStyle(
-                                      color: ApplicationColors.Primary_900
+                                    labelStyle: GoogleFonts.roboto(
+                                      fontWeight: FontWeight.bold,
+                                      color: ApplicationColors.Primary_900,
+                                      fontSize: 13
                                     ),
                                   ),
                                   style: const TextStyle(color: ApplicationColors.Primary_900),
@@ -274,49 +302,60 @@ class _CreateSubEnvelopePopupWidget extends State<CreateSubEnvelopePopupWidget> 
                               ),                              
                             ],
                           ) 
-                        )
-                      ],
-                    ),
-                  ),
-
-                  Container(
-                    padding: EdgeInsets.only(top: 10, left: 30),
-
-                    child: Row(
-                      children: <Widget>[
-                        Container(
-                          height: MediaQuery.of(context).size.height/50,
-                          width: MediaQuery.of(context).size.width/5, 
-                          child: Text("Manual Top Up"),
                         ),
-                        
                         Container(
-                          height: MediaQuery.of(context).size.height/50,
-                          child: Transform.scale(
-                            scale: 0.5,
-                            child: CupertinoSwitch(
-                            activeColor: ApplicationColors.Primary,
-                            value: manual_topup, 
-                            onChanged: (bool value) {
-                              setState(() {
-                                manual_topup = value;
-                              });
-                            })
-                          )                          
-                        )
+                          margin: EdgeInsets.only(top: 5, left: 40),
+                          child: Row(
+                            children: <Widget>[
+                              Container(
+                                height: MediaQuery.of(context).size.height/50,
+                                width: MediaQuery.of(context).size.width/5, 
+                                child: Text(
+                                  "Manual Top Up",
+                                  style: GoogleFonts.roboto(
+                                    color: ApplicationColors.Primary_1000,
+                                    fontSize: 10
+                                  ),
+                                ),
+                              ),
+                              
+                              Container(
+                                height: MediaQuery.of(context).size.height/50,
+                                child: Transform.scale(
+                                  scale: 0.5,
+                                  child: CupertinoSwitch(
+                                  activeColor: ApplicationColors.Primary,
+                                  value: manual_topup, 
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      manual_topup = value;
+                                    });
+                                  })
+                                )                          
+                              )
+                            ],
+                          ),
+                        ),      
                       ],
                     ),
                   ),
 
                   Container(
-                    padding: EdgeInsets.only(top: 10, left: 30),
+                    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width/12),
 
                     child: Row(
                       children: <Widget>[
                         Container(
                           height: MediaQuery.of(context).size.height/50,
                           width: MediaQuery.of(context).size.width/5, 
-                          child: Text("Roll Over to Next Month"),
+                          child: Text(
+                            "Roll Over to Next Month",
+                            style: GoogleFonts.figtree(
+                              fontWeight: FontWeight.w600,
+                              color: ApplicationColors.Primary_900,
+                              fontSize: 13
+                            ),
+                          ),
                         ),
                         
                         Container(
@@ -338,7 +377,7 @@ class _CreateSubEnvelopePopupWidget extends State<CreateSubEnvelopePopupWidget> 
                   ),
 
                   SizedBox(
-                    height: MediaQuery.of(context).size.height/70,
+                    height: MediaQuery.of(context).size.height/100,
                   ),
 
                   Container(
@@ -359,11 +398,13 @@ class _CreateSubEnvelopePopupWidget extends State<CreateSubEnvelopePopupWidget> 
                         innerColor: ApplicationColors.Primary,
                         outerColor: ApplicationColors.Secondary_100,
                         text: "Swipe to Create",
-                        textStyle: const TextStyle(
-                          color: ApplicationColors.Primary
-                        ),
-                        onSubmit: () async {
+                        textStyle: GoogleFonts.figtree(
+                          fontWeight: FontWeight.bold,
+                          color: ApplicationColors.Primary,
+                          fontSize: 13
+                        ),  
 
+                        onSubmit: () async {
                           Map<String, Object> subEnvelopeMap = {
                             "sub_envelope_name": _subEnvelopeNameController.text,
                             "sub_envelope_total_balance": _amountController.text,
